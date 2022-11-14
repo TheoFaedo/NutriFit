@@ -29,18 +29,26 @@ class VueAjouterPlat{
                 <link rel="stylesheet" href="$BaseUrl/style/main.css">
             </head>
             <body>
-                <button>Creer un plat</button>
-                <button>Ajouter plat à la liste</button>
                 <label for="pet-select">Choississez un plat</label>
                 <select name="plats" id="plat-select">
-                    <option value="">Choississez un plat</option>
+                    <option value="">Choisissez un plat</option>
                 </select>
-                <div id="val-nut"></div>
+                <button onclick="ajouterPrise()">Ajouter</button>
+                <div id="val-nut">energie: ...kcal lipides: ...g glucides: ...g proteines: ...g</div>
+        
+                <ul id="liste_prises">
+                    
+                </ul>
             </body>
         </html>
         <script>
+            let liste_prises = document.getElementById("liste_prises");
             let plats;
             selecteur = document.querySelector("#plat-select");
+        
+            window.addEventListener("load", () => {
+                actualiserPrises();
+            })
         
             function loadRessource(uri){
                 return fetch(uri).then(response => {
@@ -52,7 +60,7 @@ class VueAjouterPlat{
                 });
             }
         
-            req = loadRessource("http://localhost/NutriFit/requestGetPlats/");
+            req = loadRessource("$BaseUrl/requestGetPlats/");
         
             req.then((res) => {
                 tab = res.plats;
@@ -65,15 +73,42 @@ class VueAjouterPlat{
                 }
             )});
             
-            selecteur.addEventListener("click", (e) => {
+            selecteur.addEventListener("change", (e) => {
                 let valnut = document.getElementById("val-nut");
                 plat = plats[selecteur.value];
-                valnut.innerText = "energie: " + plat.energie + " lipides: " + plat.lipides + " glucides: " + plat.glucides + " proteines: " + plat.proteines;
+                valnut.innerText = "energie: " + plat.energie + "kcal lipides: " + plat.lipides + "g glucides: " + plat.glucides + "g proteines: " + plat.proteines + "g";
             });
+        
+            function ajouterPrise(){
+                console.log("sdf");
+                let platChoisi = selecteur.value;
+                const data = { id: platChoisi+"" };
+                fetch('$BaseUrl/requestAjouterPrise/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                    })
+                    .then((response) => response.json());
+                    actualiserPrises();
+            }
+        
+            function actualiserPrises(){
+                loadRessource("http://localhost/ProjetSolo/NutriFit/requestGetPriseDuJour")
+                    .then((res) => {
+                        Object.keys(res.prises).forEach((key) => {
+                            let li = document.createElement("li");
+                            li.innerText = res.prises[key].nom;
+                            liste_prises.appendChild(li);
+                        });
+                    });
+            }
             
         </script>
         END ;
 
         return $html;
     }
+
 }

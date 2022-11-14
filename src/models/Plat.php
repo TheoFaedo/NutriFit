@@ -7,4 +7,8 @@ class Plat extends \Illuminate\Database\Eloquent\Model{
     protected $table = 'plat';
     protected $primaryKey = 'id_plat';
 
+    public function prises(){
+        return $this->hasMany('App\Models\Prise', "id_prise");
+    }
+
 }

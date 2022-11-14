@@ -8,6 +8,9 @@ use \Psr\Http\Message\ResponseInterface as Response;
 use app\controleurs\ControleurPage;
 use app\controleurs\ControleurCreerPlat;
 use app\controleurs\ControleurGetPlats;
+use app\controleurs\ControleurAddPrise;
+use app\controleurs\ControleurGetPriseJour;
+use app\controleurs\ControleurGetObjectif;
 
 $c = new \Slim\Container(['settings'=>['displayErrorDetails'=>true]]);
 $app = new \Slim\App($c);
@@ -51,6 +54,24 @@ $app->post('/requestCreerPlat[/]', function( $rq, $rs, $args ) {
 
 $app->get('/requestGetPlats[/]', function( $rq, $rs, $args ) {
     $cont= new ControleurGetPlats($this) ;
+
+    return $cont->getPage($rq, $rs, $args);
+});
+
+$app->get('/requestGetPriseDuJour[/]', function( $rq, $rs, $args ) {
+    $cont= new ControleurGetPriseJour($this) ;
+
+    return $cont->getPage($rq, $rs, $args);
+});
+
+$app->get('/requestGetObjectif[/]', function( $rq, $rs, $args ) {
+    $cont= new ControleurGetObjectif($this) ;
+
+    return $cont->getPage($rq, $rs, $args);
+});
+
+$app->post('/requestAjouterPrise[/]', function( $rq, $rs, $args ) {
+    $cont= new ControleurAddPrise($this) ;
 
     return $cont->getPage($rq, $rs, $args);
 });
