@@ -30,7 +30,7 @@ class VueAccueil{
             </head>
             <body>
                 <button onclick="window.location.href = '$BaseUrl/creerPlat';" >Creer un plat</button>
-                <button>Ajouter plat à la liste</button>
+                <button onclick="window.location.href = '$BaseUrl/enregistrerPrise';">Enregistrer une prise</button>
             </body>
         </html>   
         </html>

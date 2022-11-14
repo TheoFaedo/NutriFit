@@ -5,6 +5,7 @@ require 'vendor/autoload.php';
 
 use app\vues\VueAccueil;
 use app\vues\VueCreerPlat;
+use app\vues\VueAjouterPlat;
 
 use app\autres\ConnectionFactory;
 use app\autres\FonctionsUtiles;
@@ -36,7 +37,7 @@ class ControleurPage {
                 $v = new VueCreerPlat($rq);
                 break;
             case "ajouterPlat":
-                $v = new VueInscription($rq);
+                $v = new VueAjouterPlat($rq);
                 break;
             default:
                 $v = new VueAccueil($rq);

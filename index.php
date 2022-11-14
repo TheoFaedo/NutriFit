@@ -7,6 +7,7 @@ use \Psr\Http\Message\ResponseInterface as Response;
 
 use app\controleurs\ControleurPage;
 use app\controleurs\ControleurCreerPlat;
+use app\controleurs\ControleurGetPlats;
 
 $c = new \Slim\Container(['settings'=>['displayErrorDetails'=>true]]);
 $app = new \Slim\App($c);
@@ -30,10 +31,26 @@ $app->get('/creerPlat[/]', function( $rq, $rs, $args ) {
 });
 
 /**
- * REQUETES POST
+ * ROUTE PAGE EnregistrerPrise
+ */
+$app->get('/enregistrerPrise[/]', function( $rq, $rs, $args ) {
+    $cont= new ControleurPage($this, "ajouterPlat") ;
+
+    return $cont->getPage( $rq, $rs, $args );
+});
+
+
+/**
+ * REQUETES
  */
 $app->post('/requestCreerPlat[/]', function( $rq, $rs, $args ) {
     $cont= new ControleurCreerPlat($this) ;
+
+    return $cont->getPage($rq, $rs, $args);
+});
+
+$app->get('/requestGetPlats[/]', function( $rq, $rs, $args ) {
+    $cont= new ControleurGetPlats($this) ;
 
     return $cont->getPage($rq, $rs, $args);
 });

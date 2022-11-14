@@ -31,9 +31,47 @@ class VueAjouterPlat{
             <body>
                 <button>Creer un plat</button>
                 <button>Ajouter plat à la liste</button>
+                <label for="pet-select">Choississez un plat</label>
+                <select name="plats" id="plat-select">
+                    <option value="">Choississez un plat</option>
+                </select>
+                <div id="val-nut"></div>
             </body>
-        </html>   
         </html>
+        <script>
+            let plats;
+            selecteur = document.querySelector("#plat-select");
+        
+            function loadRessource(uri){
+                return fetch(uri).then(response => {
+                    if(response.ok){
+                        return response.json();
+                    }else{
+                        Promise.reject(new Error(response.statusText));
+                    }
+                });
+            }
+        
+            req = loadRessource("http://localhost/NutriFit/requestGetPlats/");
+        
+            req.then((res) => {
+                tab = res.plats;
+                plats = tab;
+                Object.keys(tab).forEach((key) => {
+                    let opt = document.createElement("option");
+                    opt.value = key;
+                    opt.text = tab[key].nom;
+                    selecteur.options.add(opt);
+                }
+            )});
+            
+            selecteur.addEventListener("click", (e) => {
+                let valnut = document.getElementById("val-nut");
+                plat = plats[selecteur.value];
+                valnut.innerText = "energie: " + plat.energie + " lipides: " + plat.lipides + " glucides: " + plat.glucides + " proteines: " + plat.proteines;
+            });
+            
+        </script>
         END ;
 
         return $html;
