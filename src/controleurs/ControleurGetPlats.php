@@ -37,6 +37,6 @@ class ControleurGetPlats {
 
         $res = array("plats" => $platsArr);
         
-        return $rs->withJson($res, 201, JSON_PRETTY_PRINT);
+        return $rs->withJson($res, 201);
     }
 }

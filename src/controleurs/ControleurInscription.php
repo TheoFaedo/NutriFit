@@ -32,7 +32,6 @@ class ControleurInscription {
             $name = $rq->getParsedBodyParam("name");
             $mdp = $rq->getParsedBodyParam("mdp");
 
-
             $mdp = password_hash($mdp, PASSWORD_DEFAULT);
 
             $user = new User();

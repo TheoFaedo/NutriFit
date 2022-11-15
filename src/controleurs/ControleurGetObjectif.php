@@ -30,6 +30,6 @@ class ControleurGetObjectif {
                 "obj_proteines" => $user->oj_proteines
         ));
         
-        return $rs->withJson($res, 201, JSON_PRETTY_PRINT);
+        return $rs->withJson($res, 201);
     }
 }

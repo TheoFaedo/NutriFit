@@ -35,77 +35,14 @@ class VueAjouterPlat{
                 </select>
                 <button onclick="ajouterPrise()">Ajouter</button>
                 <div id="val-nut">energie: ...kcal lipides: ...g glucides: ...g proteines: ...g</div>
-        
+                <br/>
                 <ul id="liste_prises">
                     
                 </ul>
+                <div id="obj"></div>
             </body>
         </html>
-        <script>
-            let liste_prises = document.getElementById("liste_prises");
-            let plats;
-            selecteur = document.querySelector("#plat-select");
-        
-            window.addEventListener("load", () => {
-                actualiserPrises();
-            })
-        
-            function loadRessource(uri){
-                return fetch(uri).then(response => {
-                    if(response.ok){
-                        return response.json();
-                    }else{
-                        Promise.reject(new Error(response.statusText));
-                    }
-                });
-            }
-        
-            req = loadRessource("$BaseUrl/requestGetPlats/");
-        
-            req.then((res) => {
-                tab = res.plats;
-                plats = tab;
-                Object.keys(tab).forEach((key) => {
-                    let opt = document.createElement("option");
-                    opt.value = key;
-                    opt.text = tab[key].nom;
-                    selecteur.options.add(opt);
-                }
-            )});
-            
-            selecteur.addEventListener("change", (e) => {
-                let valnut = document.getElementById("val-nut");
-                plat = plats[selecteur.value];
-                valnut.innerText = "energie: " + plat.energie + "kcal lipides: " + plat.lipides + "g glucides: " + plat.glucides + "g proteines: " + plat.proteines + "g";
-            });
-        
-            function ajouterPrise(){
-                console.log("sdf");
-                let platChoisi = selecteur.value;
-                const data = { id: platChoisi+"" };
-                fetch('$BaseUrl/requestAjouterPrise/', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(data),
-                    })
-                    .then((response) => response.json());
-                    actualiserPrises();
-            }
-        
-            function actualiserPrises(){
-                loadRessource("http://localhost/ProjetSolo/NutriFit/requestGetPriseDuJour")
-                    .then((res) => {
-                        Object.keys(res.prises).forEach((key) => {
-                            let li = document.createElement("li");
-                            li.innerText = res.prises[key].nom;
-                            liste_prises.appendChild(li);
-                        });
-                    });
-            }
-            
-        </script>
+        <script src="$BaseUrl/js/ajouterPrise.js"></script>
         END ;
 
         return $html;

@@ -21,7 +21,7 @@ class ControleurGetPriseJour {
 
         ConnectionFactory::creerConnection();
 
-        $prises = Prise::where("date_prise", ">", date('Y-m-d')."00:00:00", "AND", "date_prise", "<", date('Y-m-d')."23:59:59")->get();
+        $prises = Prise::where("date_prise", ">", (date('Y-m-d')." 00:00:00"), "AND", "date_prise", "<", (date('Y-m-d')." 23:59:59"))->get();
         $prisesArr = [];
         foreach ($prises as $value) {
             $plat = $value->plat()->first();
@@ -37,6 +37,6 @@ class ControleurGetPriseJour {
 
         $res = array("prises" => $prisesArr);
         
-        return $rs->withJson($res, 201, JSON_PRETTY_PRINT);
+        return $rs->withJson($res, 201);
     }
 }

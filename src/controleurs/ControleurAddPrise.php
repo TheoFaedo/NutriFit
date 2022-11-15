@@ -31,6 +31,6 @@ class ControleurAddPrise {
 
         $res = array(1 => "success");
         
-        return $rs->withJson($res, 201, JSON_PRETTY_PRINT);
+        return $rs->withJson($res, 201);
     }
 }
