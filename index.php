@@ -11,6 +11,7 @@ use app\controleurs\ControleurGetPlats;
 use app\controleurs\ControleurAddPrise;
 use app\controleurs\ControleurGetPriseJour;
 use app\controleurs\ControleurGetObjectif;
+use app\controleurs\ControleurSupPlat;
 
 $c = new \Slim\Container(['settings'=>['displayErrorDetails'=>true]]);
 $app = new \Slim\App($c);
@@ -72,6 +73,12 @@ $app->get('/requestGetObjectif[/]', function( $rq, $rs, $args ) {
 
 $app->post('/requestAjouterPrise[/]', function( $rq, $rs, $args ) {
     $cont= new ControleurAddPrise($this) ;
+
+    return $cont->getPage($rq, $rs, $args);
+});
+
+$app->post('/requestSupprimerPlat[/]', function( $rq, $rs, $args ) {
+    $cont= new ControleurSupPlat($this) ;
 
     return $cont->getPage($rq, $rs, $args);
 });

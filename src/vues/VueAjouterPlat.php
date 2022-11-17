@@ -29,17 +29,38 @@ class VueAjouterPlat{
                 <link rel="stylesheet" href="$BaseUrl/style/main.css">
             </head>
             <body>
-                <label for="pet-select">Choississez un plat</label>
-                <select name="plats" id="plat-select">
-                    <option value="">Choisissez un plat</option>
-                </select>
-                <button onclick="ajouterPrise()">Ajouter</button>
-                <div id="val-nut">energie: ...kcal lipides: ...g glucides: ...g proteines: ...g</div>
-                <br/>
-                <ul id="liste_prises">
-                    
-                </ul>
-                <div id="obj"></div>
+                <div id=corp class="corp_enregistrerprise">
+                    <div id="bar"><div>Nutrifit</div></div>
+                    <div class="illot">
+                        <div class="titre">Ajouter Prise</div>
+                        <select name="plats" id="plat-select">
+                            <option value="">Choisissez un plat</option>
+                        </select>
+                        <button onclick="ajouterPrise()">Ajouter</button>
+                        <div id="val-nut" class="aff_vn">
+                            <div class="nut_component"><div class="t_vnut">energie</div><span class="valn">---</span>kcal</div>
+                            <div class="nut_component"><div class="t_vnut">lipides</div><span class="valn">---</span>g</div>
+                            <div class="nut_component"><div class="t_vnut">glucides</div><span class="valn">---</span>g</div>
+                            <div class="nut_component"><div class="t_vnut">proteines</div><span class="valn">---</span>g</div>
+                        </div>
+                    </div>
+                    <div class="illot" style="background-color:var(--color2); font-size: 17px;">
+                        <div class="titre">Liste prises du jour</div>
+                        <ul id="liste_prises">
+                            
+                        </ul>
+                    </div>
+                    <div class="illot">
+                        <div class="titre" style="float:down">Objectif journalier</div>
+                        <div class="aff_vn">
+                            <div class="nut_component"><div class="t_vnut">energie</div><span class="prog">---</span><br>/<span class="obj">---</span>kcal</div>
+                            <div class="nut_component"><div class="t_vnut">lipides</div><span class="prog">---</span><br>/<span class="obj">---</span>g</div>
+                            <div class="nut_component"><div class="t_vnut">glucides</div><span class="prog">---</span><br>/<span class="obj">---</span>g</div>
+                            <div class="nut_component"><div class="t_vnut">proteines</div><span class="prog">---</span><br>/<span class="obj">---</span>g</div>
+                        </div>
+                    </div>
+                    <div id="footbar"></div>
+                </div>
             </body>
         </html>
         <script src="$BaseUrl/js/ajouterPrise.js"></script>

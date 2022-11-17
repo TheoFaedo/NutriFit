@@ -5,6 +5,7 @@ selecteur = document.querySelector("#plat-select");
 
 window.addEventListener("load", () => {
     actualiserPrises();
+    actualiserObjectif();
 })
 
 function loadRessource(uri){
@@ -33,11 +34,10 @@ req.then((res) => {
 selecteur.addEventListener("change", (e) => {
     let valnut = document.getElementById("val-nut");
     plat = plats[selecteur.value];
-    valnut.innerText = "energie: " + plat.energie + "kcal lipides: " + plat.lipides + "g glucides: " + plat.glucides + "g proteines: " + plat.proteines + "g";
+    actualiserValNut(plat);
 });
 
 function ajouterPrise(){
-    console.log("sdf");
     let platChoisi = selecteur.value;
     const data = { id: platChoisi+"" };
     fetch('requestAjouterPrise/', {
@@ -47,21 +47,31 @@ function ajouterPrise(){
         },
         body: JSON.stringify(data),
         })
-        .then((response) => response.json());
-        actualiserPrises();
+        .then((response) => actualiserPrises());
 }
 
 function actualiserPrises(){
     loadRessource("requestGetPriseDuJour")
         .then((res) => {
+            console.log("salut");
             prises = res.prises;
-            document.getElementById("obj").innerText = sommeEnergie();
+            actualiserProgression()
             removeAllChild(liste_prises);
+            liste_prises.appendChild(document.createElement("hr"));
             Object.keys(res.prises).forEach((key) => {
+
                 let li = document.createElement("li");
                 let prise = res.prises[key];
-                li.innerText = prise.date_prise + " " + prise.nom + " " + prise.energie + "kcal";
+
+                let bouton = document.createElement("button");
+                bouton.innerText = "-";
+                bouton.onclick = () => supprimerPrise(prise.id_prise);
+                li.appendChild(bouton);
+
+                li.appendChild(document.createTextNode(prise.date_prise + " : " + prise.nom + " " + prise.energie + "kcal"));
+
                 liste_prises.appendChild(li);
+                liste_prises.appendChild(document.createElement("hr"));
             });
         });
 }
@@ -70,10 +80,54 @@ function removeAllChild(node){
     while(node.childNodes[0]) node.removeChild(node.childNodes[0]);
 }
 
-function sommeEnergie(){
-    let somme = 0;
+function sommeValNut(){
+    let somme = {energie:0, lipides:0, glucides:0, proteines:0};
     Object.keys(prises).forEach((key) => {
-        somme+= prises[key].energie;
+        somme.energie+= prises[key].energie;
+        somme.lipides+= prises[key].lipides;
+        somme.glucides+= prises[key].glucides;
+        somme.proteines+= prises[key].proteines;
     });
     return somme;
+}
+
+function actualiserProgression(){
+    let liste = document.body.getElementsByClassName("prog");
+    let objSomme = sommeValNut();
+    liste[0].innerText = objSomme.energie;
+    liste[1].innerText = objSomme.lipides;
+    liste[2].innerText = objSomme.glucides;
+    liste[3].innerText = objSomme.proteines;
+}
+
+function actualiserObjectif(){
+    let liste = document.body.getElementsByClassName("obj");
+    loadRessource("requestGetObjectif")
+        .then((res) => {
+            let obj = res.objectif;
+            liste[0].innerText = obj.obj_energie;
+            liste[1].innerText = obj.obj_lipides;
+            liste[2].innerText = obj.obj_glucides;
+            liste[3].innerText = obj.obj_proteines;
+        });
+}
+
+function actualiserValNut(plat){
+    let liste = document.body.getElementsByClassName("valn");
+    liste[0].innerText = plat.energie;
+    liste[1].innerText = plat.lipides;
+    liste[2].innerText = plat.glucides;
+    liste[3].innerText = plat.proteines;
+}
+
+function supprimerPrise(idprise){
+    const data = { id: idprise };
+    fetch('requestSupprimerPlat/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+        })
+        .then((response) => actualiserPrises());
 }

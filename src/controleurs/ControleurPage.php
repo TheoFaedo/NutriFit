@@ -10,10 +10,6 @@ use app\vues\VueAjouterPlat;
 use app\autres\ConnectionFactory;
 use app\autres\FonctionsUtiles;
 
-use app\models\User;
-use app\models\UserActions;
-use app\models\Actions;
-
 /**
  * Controleur dont le but est de rediriger vers des pages spécifique dont l'identifiant est donnée en paramètre.
  */

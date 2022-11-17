@@ -9,8 +9,6 @@ use app\autres\ConnectionFactory;
 use app\autres\FonctionsUtiles;
 
 use app\models\User;
-use app\models\UserActions;
-use app\models\Actions;
 
 class ControleurConnection {
 

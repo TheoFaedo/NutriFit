@@ -26,6 +26,7 @@ class ControleurGetPriseJour {
         foreach ($prises as $value) {
             $plat = $value->plat()->first();
             $prisesArr[$value->id_prise] = array(
+                "id_prise" => $value->id_prise,
                 "date_prise" => \DateTime::createFromFormat("Y-m-d H:i:s", $value->date_prise)->format("H:i"),
                 "nom" => $plat->nom, 
                 "energie" => $plat->energie, 
