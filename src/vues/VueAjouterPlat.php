@@ -59,10 +59,11 @@ class VueAjouterPlat{
                             <div class="nut_component"><div class="t_vnut">proteines</div><span class="prog">---</span><br>/<span class="obj">---</span>g</div>
                         </div>
                     </div>
-                    <div id="footbar"><div class="footbar_button"><img/ src="$BaseUrl/img/clipboard.png">journal</div><div class="footbar_button"><img/ src="$BaseUrl/img/shallow-pan-of-food.png">créer un plat</div></div>
+                    <div id="footbar"><div class="footbar_button"><img/ src="$BaseUrl/img/clipboard.png" class="img_active">journal</div><div class="footbar_button"><img/ src="$BaseUrl/img/shallow-pan-of-food.png" class="img_inactive">créer un plat</div></div>
                 </div>
             </body>
         </html>
+        <script src="$BaseUrl/js/main.js"></script>
         <script src="$BaseUrl/js/ajouterPrise.js"></script>
         END ;
 

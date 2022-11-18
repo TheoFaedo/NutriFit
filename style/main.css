@@ -39,16 +39,30 @@ html, body{
     grid-template-rows: 0.5fr 5fr 10fr 5fr 1.5fr;
 }
 
-input{
+.corp_creerplat{
+    display: grid;
+    grid-template-rows: 0.5fr 20fr 1.5fr;
+}
+
+.form_component input{
     display: block;
     letter-spacing: 1px;
-    border-radius: 20px;
+    border-radius: 30px;
     font-size: 18px;
     padding: 10px 20px;
+    border: 3px solid rgb(214, 214, 192);
+    width: 90%;
     text-align: center;
-    margin-right: auto;
     margin-left: auto;
-    min-width: 70%;
+    margin-right: auto;
+}
+
+.form_component{
+    width: 100%;
+}
+
+.small_input{
+    max-width: 80px;
 }
 
 select{
@@ -120,11 +134,6 @@ li button{
     margin: 0 20px;
 }
 
-.footbar_button{
-    text-align: center;
-    font-size: 12px;
-}
-
 .titre{
     text-align: center; 
     font-size: 20px; 
@@ -136,8 +145,28 @@ li button{
     width: 40px;
     height: 40px;
     margin: auto;
-    background-color: rgb(0, 123, 255);
     display: block;
+}
+
+.footbar_button{
+    text-align: center;
+    font-size: 12px;
+}
+
+.footbar_button img:hover{
+    background-color: darkcyan;
+}
+
+.footbar_button img:active{
+    background-color: var(--color1);
+}
+
+.img_active{
+    background-color: rgb(0, 123, 255);
+}
+
+.img_inactive{
+    background-color: white;
 }
 
 hr{

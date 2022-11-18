@@ -1,7 +1,7 @@
-let liste_prises = document.getElementById("liste_prises");
+const liste_prises = document.getElementById("liste_prises");
+const selecteur = document.querySelector("#plat-select");
 let plats;
 let prises;
-selecteur = document.querySelector("#plat-select");
 
 window.addEventListener("load", () => {
     actualiserPrises();
@@ -88,6 +88,13 @@ function sommeValNut(){
         somme.glucides+= prises[key].glucides;
         somme.proteines+= prises[key].proteines;
     });
+
+    //On arrondi chaque sommes
+    somme.energie = arrondi(somme.energie, 2);
+    somme.lipides = arrondi(somme.lipides, 2);
+    somme.glucides = arrondi(somme.glucides, 2);
+    somme.proteines = arrondi(somme.proteines, 2);
+
     return somme;
 }
 
@@ -130,4 +137,10 @@ function supprimerPrise(idprise){
         body: JSON.stringify(data),
         })
         .then((response) => actualiserPrises());
+}
+
+function arrondi(nombre, precision){
+    let arrondi = nombre * Math.pow(10, precision)
+    arrondi = Math.round(arrondi);
+    return arrondi/Math.pow(10, precision);
 }
