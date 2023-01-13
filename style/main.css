@@ -102,7 +102,6 @@ button{
     background-color: rgb(91, 147, 169);
     border: 0px;
     color: white;
-    
 }
 
 .illot{
@@ -195,7 +194,7 @@ hr{
     }
 }
 
-@media (orientation: landscape) and (min-width: 1400px){
+@media (orientation: landscape) and (min-width: 800px){
     #corp{
         margin-left: 38%;
         margin-right: 38%;
