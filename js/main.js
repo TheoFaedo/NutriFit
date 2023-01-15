@@ -7,6 +7,9 @@ navbar.addEventListener("click", (e) => {
             document.location.href = "enregistrerPrise";
             break;
         case boutons_navbar[1]:
+            document.location.href = "profile";
+            break;
+        case boutons_navbar[2]:
             document.location.href = "creerPlat";
             break;
     }

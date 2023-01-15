@@ -20,7 +20,7 @@ $app = new \Slim\App($c);
  * ROUTE PAGE ACCUEIL
  */
 $app->get('/', function( $rq, $rs, $args ) {
-    $cont= new ControleurPage($this, "accueil") ;
+    $cont= new ControleurPage($this, "ajouterPlat") ;
 
     return $cont->getPage( $rq, $rs, $args );
 });
@@ -43,9 +43,36 @@ $app->get('/enregistrerPrise[/]', function( $rq, $rs, $args ) {
     return $cont->getPage( $rq, $rs, $args );
 });
 
+/**
+ * ROUTE PAGE Profile
+ */
+$app->get('/profile[/]', function( $rq, $rs, $args ) {
+    $cont= new ControleurPage($this, "ajouterPlat") ;
+
+    return $cont->getPage( $rq, $rs, $args );
+});
 
 /**
- * REQUETES
+ * ROUTE PAGE Connect
+ */
+$app->get('/connect[/]', function( $rq, $rs, $args ) {
+    $cont= new ControleurPage($this, "ajouterPlat") ;
+
+    return $cont->getPage( $rq, $rs, $args );
+});
+
+/**
+ * ROUTE PAGE Inscription
+ */
+$app->get('/signin[/]', function( $rq, $rs, $args ) {
+    $cont= new ControleurPage($this, "ajouterPlat") ;
+
+    return $cont->getPage( $rq, $rs, $args );
+});
+
+
+/**
+ * API
  */
 $app->post('/requestCreerPlat[/]', function( $rq, $rs, $args ) {
     $cont= new ControleurCreerPlat($this) ;

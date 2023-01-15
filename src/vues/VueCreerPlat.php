@@ -37,14 +37,18 @@ class VueCreerPlat{
                             <div class="form_component"><label for="energie">Nom du plat:</label><input type="text" id="nom" name="nom" requiredminlength="1" maxlength="80" size="10" placeholder="Nom du plat"></div>
                             <div class="form_component"><label for="lipides" style="margin-top:15px;">Energie(kcal):</label><input type="number" id="energie" name="energie" requiredminlength="1" maxlength="5" size="10" placeholder="Energie(kcal)"></div>
                             <div class="form_component" style="display: grid; grid-template-columns: 1fr 1fr 1fr;">
-                                <div class="form_component"><label for="lipides">Lipides(g):</label><input type="number" class="small_input" id="lipides" name="lipides" requiredminlength="0" maxlength="5" size="10" placeholder="Lipides(g)"></div>
-                                <div class="form_component"><label for="glucides">Glucides(g):</label><input type="number" class="small_input" id="glucides" name="glucides" requiredminlength="0" maxlength="5" size="10" placeholder="Glucides(g)"></div>
-                                <div class="form_component"><label for="proteines">Proteines(g):</label><input type="number" class="small_input" id="proteines" name="proteines" requiredminlength="0" maxlength="5" size="10" placeholder="Proteines(g)"></div>
+                                <div class="form_component"><label for="lipides">Lipides(g):</label><input type="number" min="0" class="small_input" id="lipides" name="lipides" requiredminlength="0" maxlength="5" size="10" placeholder="Lipides(g)"></div>
+                                <div class="form_component"><label for="glucides">Glucides(g):</label><input type="number" min="0" class="small_input" id="glucides" name="glucides" requiredminlength="0" maxlength="5" size="10" placeholder="Glucides(g)"></div>
+                                <div class="form_component"><label for="proteines">Proteines(g):</label><input type="number" min="0" class="small_input" id="proteines" name="proteines" requiredminlength="0" maxlength="5" size="10" placeholder="Proteines(g)"></div>
                             </div>
                             <button type="submit1" style="margin-top:15px; min-width: 80%; font-size: 18px">Creer le plat</button>
                         </form>    
                     </div>
-                    <div id="footbar"><div class="footbar_button"><img/ src="$BaseUrl/img/clipboard.png" class="img_inactive">journal</div><div class="footbar_button"><img/ src="$BaseUrl/img/shallow-pan-of-food.png" class="img_active">créer un plat</div></div>
+                    <div id="footbar">
+                        <div class="footbar_button"><img/ src="$BaseUrl/img/clipboard.png" class="img_inactive">journal</div>
+                        <div class="footbar_button"><img/ src="$BaseUrl/img/user.png" class="img_inactive">profile</div>
+                        <div class="footbar_button"><img/ src="$BaseUrl/img/shallow-pan-of-food.png" class="img_active">créer un plat</div>
+                    </div>
                 </div>
             </body>
         </html>   
