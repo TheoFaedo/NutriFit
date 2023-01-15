@@ -29,11 +29,11 @@ class ControleurConnection {
         }else{
             ConnectionFactory::creerConnection();
             $name = $rq->getParsedBodyParam("name");
-            $mdp = $rq->getParsedBodyParam("mdp");
+            $mdp = $rq->getParsedBodyParam("password");
 
             $user = User::where("pseudo", "=", $name)->first();
 
-            if(!password_verify($mdp, $user->mdp)){
+            if(!password_verify($mdp, $user->password)){
                 $user =null;
             }
 

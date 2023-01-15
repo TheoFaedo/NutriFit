@@ -26,17 +26,19 @@ class ControleurInscription {
             $rs = $rs->withHeader('Location', $rq->getUri()->getBasePath() . "/");
         }else{
             ConnectionFactory::creerConnection();
+
+            //Recuperation des données
             $name = $rq->getParsedBodyParam("name");
-            $mdp = $rq->getParsedBodyParam("mdp");
+            $password = $rq->getParsedBodyParam("password");
 
-            $mdp = password_hash($mdp, PASSWORD_DEFAULT);
+            //Hachage du mot de passe
+            $password = password_hash($password, PASSWORD_DEFAULT);
 
+            //Enregistrement dans la base de données
             $user = new User();
             $user->pseudo = $name;
-            $user->mdp = $mdp;
-            $user->money = 5000;
-            $user->save();
-            $user->token = hash("sha256", $user->idUser."4uD1D30uF@");
+            $user->password = $password;
+            $user->token = hash("sha256", $user->id_user."4uD1D30uF@");
             $user->save();
 
             if($user != null){
@@ -46,7 +48,6 @@ class ControleurInscription {
                 $rs = $rs->withHeader('Location', $rq->getUri()->getBasePath() . "/signin");
             }
         }
-        
         return $rs;
     }
 }

@@ -6,7 +6,7 @@ use app\autres\EquationCourbe;
 use app\autres\FonctionsUtiles;
 use app\autres\ModeleCourbe;
 
-class VueCreerPlat{
+class VueCreerPlat extends Vue{
 
     private $rq;
 
@@ -44,11 +44,7 @@ class VueCreerPlat{
                             <button type="submit1" style="margin-top:15px; min-width: 80%; font-size: 18px">Creer le plat</button>
                         </form>    
                     </div>
-                    <div id="footbar">
-                        <div class="footbar_button"><img/ src="$BaseUrl/img/clipboard.png" class="img_inactive">journal</div>
-                        <div class="footbar_button"><img/ src="$BaseUrl/img/user.png" class="img_inactive">profile</div>
-                        <div class="footbar_button"><img/ src="$BaseUrl/img/shallow-pan-of-food.png" class="img_active">créer un plat</div>
-                    </div>
+                    {$this->getFooter(2, $BaseUrl)}
                 </div>
             </body>
         </html>   

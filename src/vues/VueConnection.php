@@ -6,7 +6,7 @@ use app\autres\EquationCourbe;
 use app\autres\FonctionsUtiles;
 use app\autres\ModeleCourbe;
 
-class VueAccueil{
+class VueConnection extends Vue{
 
     private $rq;
 
@@ -29,11 +29,19 @@ class VueAccueil{
                 <link rel="stylesheet" href="$BaseUrl/style/main.css">
             </head>
             <body>
-                <button onclick="window.location.href = '$BaseUrl/creerPlat';" >Creer un plat</button>
-                <button onclick="window.location.href = '$BaseUrl/enregistrerPrise';">Enregistrer une prise</button>
+                <div id="corp" class="corp_creerplat">
+                    <div id="bar"><div>Nutrifit</div></div>
+                    <div class="illot" style="text-align:center; margin-top: 20%; margin-bottom: 20%">
+                        <div class="titre" style="margin-bottom: 20px;">Créer un plat</div>
+                        <form action="$BaseUrl/requestCreerPlat" method="POST">
+                            VueConnection
+                        </form>    
+                    </div>
+                    {$this->getFooter(1, $BaseUrl)}
+                </div>
             </body>
         </html>   
-        </html>
+        <script src="$BaseUrl/js/main.js"></script>
         END ;
 
         return $html;

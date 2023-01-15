@@ -77,6 +77,7 @@ function actualiserPrises(){
 }
 
 function removeAllChild(node){
+    if (node.childNodes == null) return;
     while(node.childNodes[0]) node.removeChild(node.childNodes[0]);
 }
 

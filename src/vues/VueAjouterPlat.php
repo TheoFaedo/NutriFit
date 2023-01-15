@@ -6,7 +6,7 @@ use app\autres\EquationCourbe;
 use app\autres\FonctionsUtiles;
 use app\autres\ModeleCourbe;
 
-class VueAjouterPlat{
+class VueAjouterPlat extends Vue{
 
     private $rq;
 
@@ -59,11 +59,7 @@ class VueAjouterPlat{
                             <div class="nut_component"><div class="t_vnut">proteines</div><span class="prog">---</span><br>/<span class="obj">---</span>g</div>
                         </div>
                     </div>
-                    <div id="footbar">
-                        <div class="footbar_button"><img/ src="$BaseUrl/img/clipboard.png" class="img_active">journal</div>
-                        <div class="footbar_button"><img/ src="$BaseUrl/img/user.png" class="img_inactive">profile</div>
-                        <div class="footbar_button"><img/ src="$BaseUrl/img/shallow-pan-of-food.png" class="img_inactive">créer un plat</div>
-                    </div>
+                    {$this->getFooter(0, $BaseUrl)}
                 </div>
             </body>
         </html>
