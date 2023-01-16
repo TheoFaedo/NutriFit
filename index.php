@@ -67,7 +67,7 @@ $app->get('/signin[/]', function( $rq, $rs, $args ) {
  * 
  ***************************************/
 
-$app->post('/connectRedirect[/]', function( $rq, $rs, $args ) {
+$app->post('/connectionRedirect[/]', function( $rq, $rs, $args ) {
     $cont= new ControleurConnection($this) ;
 
     return $cont->getPage($rq, $rs, $args);

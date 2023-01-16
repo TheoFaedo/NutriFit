@@ -21,10 +21,13 @@ class ControleurAddPrise {
 
         ConnectionFactory::creerConnection();
 
+        session_start();
+
         $id = $rq->getParsedBodyParam("id");
 
         $prise = new Prise();
         $prise->plat = $id;
+        $prise->id_user = $_SESSION["id_user"];
         $prise->multiplicateurPoids = 1;
         $prise->date_prise = date('Y-m-d H:i:s');
         $prise->save();

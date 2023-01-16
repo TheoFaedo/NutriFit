@@ -31,7 +31,7 @@ class VueCreerPlat extends Vue{
             <body>
                 <div id="corp" class="corp_creerplat">
                     <div id="bar"><div>Nutrifit</div></div>
-                    <div class="illot" style="text-align:center; margin-top: 20%; margin-bottom: 20%">
+                    <div class="illot" style="text-align:center; margin-top: 20%; margin-bottom: auto">
                         <div class="titre" style="margin-bottom: 20px;">Créer un plat</div>
                         <form action="$BaseUrl/requestCreerPlat" method="POST">
                             <div class="form_component"><label for="energie">Nom du plat:</label><input type="text" id="nom" name="nom" requiredminlength="1" maxlength="80" size="10" placeholder="Nom du plat"></div>
@@ -41,7 +41,7 @@ class VueCreerPlat extends Vue{
                                 <div class="form_component"><label for="glucides">Glucides(g):</label><input type="number" min="0" class="small_input" id="glucides" name="glucides" requiredminlength="0" maxlength="5" size="10" placeholder="Glucides(g)"></div>
                                 <div class="form_component"><label for="proteines">Proteines(g):</label><input type="number" min="0" class="small_input" id="proteines" name="proteines" requiredminlength="0" maxlength="5" size="10" placeholder="Proteines(g)"></div>
                             </div>
-                            <button type="submit1" style="margin-top:15px; min-width: 80%; font-size: 18px">Creer le plat</button>
+                            <button type="submit" style="margin-top:15px; min-width: 80%; font-size: 18px">Creer le plat</button>
                         </form>    
                     </div>
                     {$this->getFooter(2, $BaseUrl)}

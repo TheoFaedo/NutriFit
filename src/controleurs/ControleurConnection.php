@@ -24,11 +24,11 @@ class ControleurConnection {
         $BaseUrl = $rq->getUri()->getBasePath();
 
         $rs = $rs->withHeader('Location', $rq->getUri()->getBasePath() . "/");
-        if(isset($_SESSION["token"])){
+        if(isset($_SESSION["id_user"])){
             $rs = $rs->withHeader('Location', $rq->getUri()->getBasePath() . "/");
         }else{
             ConnectionFactory::creerConnection();
-            $name = $rq->getParsedBodyParam("name");
+            $name = $rq->getParsedBodyParam("username");
             $mdp = $rq->getParsedBodyParam("password");
 
             $user = User::where("pseudo", "=", $name)->first();
@@ -38,7 +38,7 @@ class ControleurConnection {
             }
 
             if($user != null){
-                $_SESSION["token"] = $user->token;
+                $_SESSION["id_user"] = $user->id_user;
                 $rs = $rs->withHeader('Location', $rq->getUri()->getBasePath() . "/");
             }else{
                 $rs = $rs->withHeader('Location', $rq->getUri()->getBasePath() . "/connect");

@@ -22,7 +22,9 @@ class ControleurGetPlats {
 
         ConnectionFactory::creerConnection();
 
-        $plats = Plat::all();
+        session_start();
+
+        $plats = Plat::all()->where("id_user", "=", $_SESSION["id_user"]);
 
         $platsArr = [];
         foreach ($plats as $value) {

@@ -31,10 +31,18 @@ class VueInscription extends Vue{
             <body>
                 <div id="corp" class="corp_creerplat">
                     <div id="bar"><div>Nutrifit</div></div>
-                    <div class="illot" style="text-align:center; margin-top: 20%; margin-bottom: 20%">
-                        <div class="titre" style="margin-bottom: 20px;">Créer un plat</div>
-                        <form action="$BaseUrl/requestCreerPlat" method="POST">
-                            VueInscription
+                    <div class="illot" style="text-align:center; margin-top: 20%; margin-bottom: auto;">
+                        <div class="titre" style="margin-bottom: 20px;">Inscription</div>
+                        <form action="$BaseUrl/inscriptionRedirect" method="POST">
+                            <div class="form_component">
+                                <label for="name">Nom d'utilisateur</label>
+                                <input class="form_component" id="username" name="username" type="text"></input>
+                            </div>
+                            <div class="form_component">
+                                <label for="password">Mot de passe</label>
+                                <input id="password" name="password" type="password"></input>
+                            </div>
+                            <button type="submit" style="margin-top:15px; min-width: 92%; font-size: 18px">S'inscrire</button>
                         </form>    
                     </div>
                     {$this->getFooter(1, $BaseUrl)}

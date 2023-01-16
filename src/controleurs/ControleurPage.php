@@ -29,6 +29,20 @@ class ControleurPage {
     public function getPage($rq, $rs, $args) {  
 
         session_start();
+        if(!isset($_SESSION["id_user"])){
+            switch($this->nomPage){
+                case "connection":
+                    $v = new VueConnection($rq);
+                    $rs->getBody()->write($v->render());
+                    return $rs;
+    
+                case "inscription":
+                    $v = new VueInscription($rq);
+                    $rs->getBody()->write($v->render());
+                    return $rs;
+            }
+            return $rs->withHeader('Location', $rq->getUri()->getBasePath() . "/connect");
+        }
 
         $v;
         switch($this->nomPage){
@@ -41,18 +55,7 @@ class ControleurPage {
                 break;
 
             case "profil":
-                if(!isset($_SESSION["id_user"])){
-                    return $rs->withHeader('Location', $rq->getUri()->getBasePath() . "/connect");
-                }
                 $v = new VueProfil($rq);
-                break;
-
-            case "connection":
-                $v = new VueConnection($rq);
-                break;
-
-            case "inscription":
-                $v = new VueInscription($rq);
                 break;
 
             default:

@@ -22,13 +22,13 @@ class ControleurInscription {
         session_start();
         $BaseUrl = $rq->getUri()->getBasePath();
 
-        if(isset($_SESSION["token"])){
+        if(isset($_SESSION["id_user"])){
             $rs = $rs->withHeader('Location', $rq->getUri()->getBasePath() . "/");
         }else{
             ConnectionFactory::creerConnection();
 
             //Recuperation des données
-            $name = $rq->getParsedBodyParam("name");
+            $name = $rq->getParsedBodyParam("username");
             $password = $rq->getParsedBodyParam("password");
 
             //Hachage du mot de passe
@@ -38,11 +38,12 @@ class ControleurInscription {
             $user = new User();
             $user->pseudo = $name;
             $user->password = $password;
-            $user->token = hash("sha256", $user->id_user."4uD1D30uF@");
+            $user->save();
+            $user->token = hash("sha256", ($user->id_user."4uD1D30uF"));
             $user->save();
 
             if($user != null){
-                $_SESSION["token"] = $user->token;
+                $_SESSION["id_user"] = $user->id_user;
                 $rs = $rs->withHeader('Location', $rq->getUri()->getBasePath() . "/");
             }else{
                 $rs = $rs->withHeader('Location', $rq->getUri()->getBasePath() . "/signin");

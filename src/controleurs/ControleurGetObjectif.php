@@ -20,7 +20,9 @@ class ControleurGetObjectif {
 
         ConnectionFactory::creerConnection();
 
-        $user = User::where("id_user", "=", "1")->first();
+        session_start();
+
+        $user = User::where("id_user", "=", $_SESSION["id_user"])->first();
 
         $res = array("objectif" => array(
                 "obj_nom" => $user->pseudo, 

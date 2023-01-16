@@ -20,9 +20,12 @@ class ControleurCreerPlat {
     
     public function getPage($rq, $rs, $args) {
 
+        session_start();
+
         ConnectionFactory::creerConnection();
 
         $nom = $rq->getParsedBodyParam("nom");
+        $id_user = $_SESSION["id_user"];
         $energie = $rq->getParsedBodyParam("energie");
         $lipides = $rq->getParsedBodyParam("lipides");
         $glucides = $rq->getParsedBodyParam("glucides");
@@ -30,6 +33,7 @@ class ControleurCreerPlat {
 
         $plat = new Plat();
         $plat->nom = $nom;
+        $plat->id_user = $id_user;
         $plat->energie = $energie;
         $plat->lipides = $lipides;
         $plat->glucides = $glucides;
