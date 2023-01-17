@@ -35,13 +35,13 @@ class VueCreerPlat extends Vue{
                         <div class="titre" style="margin-bottom: 20px;">Créer un plat</div>
                         <form action="$BaseUrl/requestCreerPlat" method="POST">
                             <div class="form_component"><label for="energie">Nom du plat:</label><input type="text" id="nom" name="nom" requiredminlength="1" maxlength="80" size="10" placeholder="Nom du plat"></div>
-                            <div class="form_component"><label for="lipides" style="margin-top:15px;">Energie(kcal):</label><input type="number" id="energie" name="energie" requiredminlength="1" maxlength="5" size="10" placeholder="Energie(kcal)"></div>
+                            <div class="form_component"><label for="lipides" style="margin-top:15px;">Energie(kcal):</label><input type="number" value="0" id="energie" name="energie" requiredminlength="1" maxlength="5" size="10" placeholder="Energie(kcal)"></div>
                             <div class="form_component" style="display: grid; grid-template-columns: 1fr 1fr 1fr;">
-                                <div class="form_component"><label for="lipides">Lipides(g):</label><input type="number" min="0" class="small_input" id="lipides" name="lipides" requiredminlength="0" maxlength="5" size="10" placeholder="Lipides(g)"></div>
-                                <div class="form_component"><label for="glucides">Glucides(g):</label><input type="number" min="0" class="small_input" id="glucides" name="glucides" requiredminlength="0" maxlength="5" size="10" placeholder="Glucides(g)"></div>
-                                <div class="form_component"><label for="proteines">Proteines(g):</label><input type="number" min="0" class="small_input" id="proteines" name="proteines" requiredminlength="0" maxlength="5" size="10" placeholder="Proteines(g)"></div>
+                                <div class="form_component"><label for="lipides">Lipides(g):</label><input type="number" min="0" value="0" class="small_input" id="lipides" name="lipides" requiredminlength="0" maxlength="5" size="10" placeholder="Lipides(g)"></div>
+                                <div class="form_component"><label for="glucides">Glucides(g):</label><input type="number" min="0" value="0" class="small_input" id="glucides" name="glucides" requiredminlength="0" maxlength="5" size="10" placeholder="Glucides(g)"></div>
+                                <div class="form_component"><label for="proteines">Proteines(g):</label><input type="number" min="0" value="0" class="small_input" id="proteines" name="proteines" requiredminlength="0" maxlength="5" size="10" placeholder="Proteines(g)"></div>
                             </div>
-                            <button type="submit" style="margin-top:15px; min-width: 80%; font-size: 18px">Creer le plat</button>
+                            <button type="submit" style="margin-top:15px; min-width: 80%; font-size: 18px">Créer le plat</button>
                         </form>    
                     </div>
                     {$this->getFooter(2, $BaseUrl)}
@@ -49,6 +49,7 @@ class VueCreerPlat extends Vue{
             </body>
         </html>   
         <script src="$BaseUrl/js/main.js"></script>
+        <script src="$BaseUrl/js/creerPlat.js"></script>
         END ;
 
         return $html;

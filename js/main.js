@@ -1,6 +1,7 @@
 const boutons_navbar = document.querySelectorAll(".footbar_button img");
 const navbar = document.getElementById("footbar");
 
+//Handler permettant de gérer le changement entre les différents menus de l'application
 navbar.addEventListener("click", (e) => {
     switch(e.target){
         case boutons_navbar[0]:

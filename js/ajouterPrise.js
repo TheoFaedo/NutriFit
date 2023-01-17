@@ -18,8 +18,8 @@ function loadRessource(uri){
     });
 }
 
+//Récupération des plats de l'utilisateur
 req = loadRessource("requestGetPlats");
-
 req.then((res) => {
     tab = res.plats;
     plats = tab;
@@ -31,14 +31,20 @@ req.then((res) => {
     }
 )});
 
+/**
+ * Handler qui permet d'actualiser les informations du plat selectionné
+ */
 selecteur.addEventListener("change", (e) => {
     let valnut = document.getElementById("val-nut");
     plat = plats[selecteur.value];
     actualiserValNut(plat);
 });
 
+/**
+ * Fonction permettant d'ajouter le plat selectionner comme prise
+ */
 function ajouterPrise(){
-    let platChoisi = selecteur.value;
+    let platChoisi = selecteur.value; //On récupère l'id du plat
     const data = { id: platChoisi+"" };
     fetch('requestAjouterPrise/', {
         method: 'POST',
@@ -50,37 +56,57 @@ function ajouterPrise(){
         .then((response) => actualiserPrises());
 }
 
+/**
+ * Fontion qui actualise l'affichage des prise de la journée pour l'utilisateur
+ */
 function actualiserPrises(){
     loadRessource("requestGetPriseDuJour")
         .then((res) => {
-            console.log("salut");
             prises = res.prises;
-            actualiserProgression()
+            actualiserProgression();
+
+            //On supprime tout les elements de la liste
             removeAllChild(liste_prises);
+
+            //On ajoute une premère ligne de séparation
             liste_prises.appendChild(document.createElement("hr"));
+
+            //On va ajouter pour chaques prise, une ligne correspondante
             Object.keys(res.prises).forEach((key) => {
 
+                //On créé l'element de la liste
                 let li = document.createElement("li");
                 let prise = res.prises[key];
 
+                //On créé le bouton de supression de la prise
                 let bouton = document.createElement("button");
                 bouton.innerText = "-";
                 bouton.onclick = () => supprimerPrise(prise.id_prise);
                 li.appendChild(bouton);
 
+                //Ajoute un texte comprenant la date de la prise du plat, son nom et son nombre de calories
                 li.appendChild(document.createTextNode(prise.date_prise + " : " + prise.nom + " " + prise.energie + "kcal"));
 
+                //On ajoute l'élément à la liste
                 liste_prises.appendChild(li);
-                liste_prises.appendChild(document.createElement("hr"));
+                liste_prises.appendChild(document.createElement("hr")); //On ajoute une ligne de séparation en dessous
             });
         });
 }
 
+/**
+ * Fonction qui supprime tout les fils d'un noeud donné en paramètre
+ * @param {*} node : noeud dont on veut supprimer les fils
+ */
 function removeAllChild(node){
     if (node.childNodes == null) return;
     while(node.childNodes[0]) node.removeChild(node.childNodes[0]);
 }
 
+/**
+ * Fonction qui calcule la somme de toutes les valeurs nutrionelles de toutes les prises du jour
+ * @returns un objet contenant la somme de chaques valeurs nutrionelles
+ */
 function sommeValNut(){
     let somme = {energie:0, lipides:0, glucides:0, proteines:0};
     Object.keys(prises).forEach((key) => {
@@ -90,15 +116,18 @@ function sommeValNut(){
         somme.proteines+= prises[key].proteines;
     });
 
-    //On arrondi chaque sommes
-    somme.energie = arrondi(somme.energie, 2);
-    somme.lipides = arrondi(somme.lipides, 2);
-    somme.glucides = arrondi(somme.glucides, 2);
-    somme.proteines = arrondi(somme.proteines, 2);
+    //On arrondi chaque sommes à la centième près
+    somme.energie = somme.energie.toFixed(1);
+    somme.lipides = somme.lipides.toFixed(1);
+    somme.glucides = somme.glucides.toFixed(1);
+    somme.proteines = somme.proteines.toFixed(1);
 
     return somme;
 }
 
+/**
+ * Fonction qui à son appel, actualise la somme des valeurs nutrionelles de toutes les prises
+ */
 function actualiserProgression(){
     let liste = document.body.getElementsByClassName("prog");
     let objSomme = sommeValNut();
@@ -108,6 +137,9 @@ function actualiserProgression(){
     liste[3].innerText = objSomme.proteines;
 }
 
+/**
+ * Fonction permettant d'actualiser les valeurs d'objectif affichées
+ */
 function actualiserObjectif(){
     let liste = document.body.getElementsByClassName("obj");
     loadRessource("requestGetObjectif")
@@ -120,6 +152,10 @@ function actualiserObjectif(){
         });
 }
 
+/**
+ * Fonction permettant d'actualisé les valeurs des macrosnutriments affichées lorsque qu'un plat est selectionné
+ * @param {*} plat 
+ */
 function actualiserValNut(plat){
     let liste = document.body.getElementsByClassName("valn");
     liste[0].innerText = plat.energie;
@@ -128,8 +164,12 @@ function actualiserValNut(plat){
     liste[3].innerText = plat.proteines;
 }
 
+/**
+ * Fonction qui appelle la requête de suppression de prise dans la base de données
+ * @param {*} idprise : id de la prise à supprimer
+ */
 function supprimerPrise(idprise){
-    const data = { id: idprise };
+    const data = { id: idprise }; //On mets l'id de la prise en payload
     fetch('requestSupprimerPlat/', {
         method: 'POST',
         headers: {
@@ -138,10 +178,4 @@ function supprimerPrise(idprise){
         body: JSON.stringify(data),
         })
         .then((response) => actualiserPrises());
-}
-
-function arrondi(nombre, precision){
-    let arrondi = nombre * Math.pow(10, precision)
-    arrondi = Math.round(arrondi);
-    return arrondi/Math.pow(10, precision);
 }

@@ -32,7 +32,7 @@ class VueProfil extends Vue{
                 <div id="corp" class="corp_creerplat">
                     <div id="bar"><div>Nutrifit</div></div>
                     <div class="illot" style="text-align:center; margin-top: 20%; margin-bottom: 20%">
-                        <div class="titre" style="margin-bottom: 20px;">Créer un plat</div>
+                        <div class="titre" style="margin-bottom: 20px;">Profil</div>
                         <form action="$BaseUrl/requestCreerPlat" method="POST">
                             VueProfil
                         </form>    
