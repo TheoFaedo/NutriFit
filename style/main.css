@@ -176,31 +176,29 @@ hr{
     border: none;
 }
 
-/* width */
+/*
+    SCROLLBAR
+*/
 ::-webkit-scrollbar {
     width: 6px;
 }
 
-/* Track */
 ::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0);
+    background: rgba(0, 0, 0, 0.09);
 }
 
-/* Handle */
 ::-webkit-scrollbar-thumb {
-    background: #888;
+    background: rgba(0, 0, 0, 0.15);
     border-radius: 10px;
-    padding: 50px;
 }
 
-
-
-/* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
     background: #555;
 }
   
-
+/*
+    MEDIA QUERIES
+*/
 @media (orientation: landscape) and (min-width: 800px){
     #corp{
         margin-left: 25%;
@@ -231,6 +229,10 @@ label{
     font-size: 14px;
     margin-top: 10px;
 }
+
+/*
+    KEYFRAMES
+*/
 
 @keyframes color {
     0%{
