@@ -13,6 +13,8 @@ use app\vues\VueConnection;
 use app\autres\ConnectionFactory;
 use app\autres\FonctionsUtiles;
 
+use app\models\User;
+
 /**
  * Controleur dont le but est de rediriger vers des pages spécifique dont l'identifiant est donnée en paramètre.
  */
@@ -29,6 +31,8 @@ class ControleurPage {
     public function getPage($rq, $rs, $args) {  
 
         session_start();
+        $v;
+
         if(!isset($_SESSION["id_user"])){
             switch($this->nomPage){
                 case "connection":
@@ -44,7 +48,9 @@ class ControleurPage {
             return $rs->withHeader('Location', $rq->getUri()->getBasePath() . "/connect");
         }
 
-        $v;
+        ConnectionFactory::creerConnection();
+        $user = User::where("id_user", "=", $_SESSION["id_user"])->first();
+
         switch($this->nomPage){
             case "creerPlat":
                 $v = new VueCreerPlat($rq);
@@ -55,7 +61,7 @@ class ControleurPage {
                 break;
 
             case "profil":
-                $v = new VueProfil($rq);
+                $v = new VueProfil($rq, $user);
                 break;
 
             default:

@@ -20,12 +20,12 @@ class ControleurGetPriseJour {
     public function getPage($rq, $rs, $args) {
 
         ConnectionFactory::creerConnection();
-
-        $prises = Prise::where("date_prise", ">", (date('Y-m-d')." 00:00:00"), "AND", "date_prise", "<", (date('Y-m-d')." 23:59:59"))->get();
+        //
+        $prises = Prise::orderBy('date_prise', 'DESC')->where("date_prise", ">", (date('Y-m-d')." 00:00:00"), "AND", "date_prise", "<", (date('Y-m-d')." 23:59:59"))->get();
         $prisesArr = [];
         foreach ($prises as $value) {
             $plat = $value->plat()->first();
-            $prisesArr[$value->id_prise] = array(
+            array_push($prisesArr, array(
                 "id_prise" => $value->id_prise,
                 "date_prise" => \DateTime::createFromFormat("Y-m-d H:i:s", $value->date_prise)->format("H:i"),
                 "nom" => $plat->nom, 
@@ -33,7 +33,7 @@ class ControleurGetPriseJour {
                 "lipides" => $plat->lipides, 
                 "glucides" => $plat->glucides, 
                 "proteines" => $plat->proteines
-            );
+            ));
         }
 
         $res = array("prises" => $prisesArr);

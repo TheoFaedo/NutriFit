@@ -51,18 +51,15 @@ html, body{
     font-size: 18px;
     padding: 10px 20px;
     border: 3px solid rgb(214, 214, 192);
-    width: 90%;
+    width: 100%;
     text-align: center;
     margin-left: auto;
-    margin-right: auto;
+    margin-right: auto;   	
+    box-sizing: border-box;
 }
 
 .form_component{
     width: 100%;
-}
-
-.small_input{
-    max-width: 80px;
 }
 
 select{
@@ -184,7 +181,7 @@ hr{
 }
 
 ::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.09);
+    background: rgba(0, 0, 0, 0);
 }
 
 ::-webkit-scrollbar-thumb {

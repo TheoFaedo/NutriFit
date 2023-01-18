@@ -19,7 +19,7 @@ function loadRessource(uri){
 }
 
 //Récupération des plats de l'utilisateur
-req = loadRessource("requestGetPlats");
+req = loadRessource("api/getPlats");
 req.then((res) => {
     tab = res.plats;
     plats = tab;
@@ -46,7 +46,7 @@ selecteur.addEventListener("change", (e) => {
 function ajouterPrise(){
     let platChoisi = selecteur.value; //On récupère l'id du plat
     const data = { id: platChoisi+"" };
-    fetch('requestAjouterPrise/', {
+    fetch('api/ajouterPrise/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -60,7 +60,7 @@ function ajouterPrise(){
  * Fontion qui actualise l'affichage des prise de la journée pour l'utilisateur
  */
 function actualiserPrises(){
-    loadRessource("requestGetPriseDuJour")
+    loadRessource("api/getPriseDuJour")
         .then((res) => {
             prises = res.prises;
             actualiserProgression();
@@ -117,10 +117,10 @@ function sommeValNut(){
     });
 
     //On arrondi chaque sommes à la centième près
-    somme.energie = somme.energie.toFixed(1);
-    somme.lipides = somme.lipides.toFixed(1);
-    somme.glucides = somme.glucides.toFixed(1);
-    somme.proteines = somme.proteines.toFixed(1);
+    somme.energie = arrondi(somme.energie);
+    somme.lipides = arrondi(somme.lipides);
+    somme.glucides = arrondi(somme.glucides);
+    somme.proteines = arrondi(somme.proteines);
 
     return somme;
 }
@@ -142,7 +142,7 @@ function actualiserProgression(){
  */
 function actualiserObjectif(){
     let liste = document.body.getElementsByClassName("obj");
-    loadRessource("requestGetObjectif")
+    loadRessource("api/getObjectif")
         .then((res) => {
             let obj = res.objectif;
             liste[0].innerText = obj.obj_energie;
@@ -157,11 +157,18 @@ function actualiserObjectif(){
  * @param {*} plat 
  */
 function actualiserValNut(plat){
-    let liste = document.body.getElementsByClassName("valn");
-    liste[0].innerText = plat.energie;
-    liste[1].innerText = plat.lipides;
-    liste[2].innerText = plat.glucides;
-    liste[3].innerText = plat.proteines;
+    let liste = Array.from(document.body.getElementsByClassName("valn"));
+
+    if(plat===undefined){ //Si le plat n'existe pas on affiche pas les valeurs nutritionelles
+        liste.forEach((e) => {
+            e.innerText="---";
+        })
+    }else{
+        liste[0].innerText = plat.energie;
+        liste[1].innerText = plat.lipides;
+        liste[2].innerText = plat.glucides;
+        liste[3].innerText = plat.proteines;
+    }
 }
 
 /**
@@ -170,7 +177,7 @@ function actualiserValNut(plat){
  */
 function supprimerPrise(idprise){
     const data = { id: idprise }; //On mets l'id de la prise en payload
-    fetch('requestSupprimerPlat/', {
+    fetch('api/supprimerPlat/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

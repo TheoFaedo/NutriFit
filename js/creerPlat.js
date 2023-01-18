@@ -40,5 +40,5 @@ function mettreMacrosAZero(){
  * @returns la conversion en energie de la quantité de ces macronutriments
  */
 function macrosToKCal(macros){
-    return (macros.lipides*9 + macros.proteines * 4 + macros.glucides * 4).toFixed(1);
+    return arrondi(macros.lipides*9 + macros.proteines * 4 + macros.glucides * 4);
 }

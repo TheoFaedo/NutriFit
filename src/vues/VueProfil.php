@@ -6,12 +6,15 @@ use app\autres\EquationCourbe;
 use app\autres\FonctionsUtiles;
 use app\autres\ModeleCourbe;
 
+use app\models\User;
+
 class VueProfil extends Vue{
 
-    private $rq;
+    private $rq, $user_data;
 
-    public function __construct($rq){
+    public function __construct($rq, $user_data){
         $this->rq = $rq;
+        $this->user_data = $user_data;
     }
 
     public function render(){
@@ -31,17 +34,24 @@ class VueProfil extends Vue{
             <body>
                 <div id="corp" class="corp_creerplat">
                     <div id="bar"><div>Nutrifit</div></div>
-                    <div class="illot" style="text-align:center; margin-top: 20%; margin-bottom: 20%">
-                        <div class="titre" style="margin-bottom: 20px;">Profil</div>
-                        <form action="$BaseUrl/requestCreerPlat" method="POST">
-                            VueProfil
-                        </form>    
+                    <div class="illot" style="text-align:center; margin-top: 10%; margin-bottom: auto">
+                        <div class="titre" style="margin-bottom: 20px;">Changer Objectif</div>
+
+                            <div class="form_component" style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr;">
+                                <div class="form_component"><label for="energie">Energie(kcal):</label><input type="number" value="{$this->user_data->oj_energie}" id="energie" name="energie" requiredminlength="1" maxlength="5" size="10" placeholder="Energie(kcal)"></div>
+                                <div class="form_component"><label for="lipides">Lipides(g):</label><input type="number" min="0" value="{$this->user_data->oj_lipides}" id="lipides" name="lipides" requiredminlength="0" maxlength="5" size="10" placeholder="Lipides(g)"></div>
+                                <div class="form_component"><label for="glucides">Glucides(g):</label><input type="number" min="0" value="{$this->user_data->oj_glucides}" id="glucides" name="glucides" requiredminlength="0" maxlength="5" size="10" placeholder="Glucides(g)"></div>
+                                <div class="form_component"><label for="proteines">Proteines(g):</label><input type="number" min="0" value="{$this->user_data->oj_proteines}" id="proteines" name="proteines" requiredminlength="0" maxlength="5" size="10" placeholder="Proteines(g)"></div>
+                            </div>
+                            <button id="bouton_obj" style="margin-top:15px; min-width: 80%; font-size: 18px">Confirmer le changement</button>
+                          
                     </div>
                     {$this->getFooter(1, $BaseUrl)}
                 </div>
             </body>
         </html>   
         <script src="$BaseUrl/js/main.js"></script>
+        <script src="$BaseUrl/js/profil.js"></script>
         END ;
 
         return $html;

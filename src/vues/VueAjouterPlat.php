@@ -34,7 +34,7 @@ class VueAjouterPlat extends Vue{
                     <div class="illot">
                         <div class="titre">Ajouter Prise</div>
                         <select name="plats" id="plat-select">
-                            <option value="">Choisissez un plat</option>
+                            <option value="-1">Choisissez un plat</option>
                         </select>
                         <button onclick="ajouterPrise()">Ajouter</button>
                         <div id="val-nut" class="aff_vn">

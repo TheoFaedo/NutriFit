@@ -15,3 +15,8 @@ navbar.addEventListener("click", (e) => {
             break;
     }
 });
+
+function arrondi(nombre){
+    if(nombre%1!=0) return nombre.toFixed(1);
+    return nombre.toFixed(0);
+}

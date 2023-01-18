@@ -12,6 +12,7 @@ use app\controleurs\ControleurAddPrise;
 use app\controleurs\ControleurGetPriseJour;
 use app\controleurs\ControleurGetObjectif;
 use app\controleurs\ControleurSupPlat;
+use app\controleurs\ControleurChangerObjectif;
 
 use app\controleurs\ControleurInscription;
 use app\controleurs\ControleurConnection;
@@ -88,38 +89,44 @@ $app->post('/inscriptionRedirect[/]', function( $rq, $rs, $args ) {
  * 
  ***************************************/
 
-$app->post('/requestCreerPlat[/]', function($rq, $rs, $args) {
+$app->post('/api/creerPlat[/]', function($rq, $rs, $args) {
     $cont= new ControleurCreerPlat($this) ;
 
     return $cont->getPage($rq, $rs, $args);
 });
 
-$app->get('/requestGetPlats[/]', function($rq, $rs, $args) {
+$app->get('/api/getPlats[/]', function($rq, $rs, $args) {
     $cont= new ControleurGetPlats($this) ;
 
     return $cont->getPage($rq, $rs, $args);
 });
 
-$app->get('/requestGetPriseDuJour[/]', function($rq, $rs, $args) {
+$app->get('/api/getPriseDuJour[/]', function($rq, $rs, $args) {
     $cont= new ControleurGetPriseJour($this) ;
 
     return $cont->getPage($rq, $rs, $args);
 });
 
-$app->get('/requestGetObjectif[/]', function($rq, $rs, $args) {
+$app->get('/api/getObjectif[/]', function($rq, $rs, $args) {
     $cont= new ControleurGetObjectif($this) ;
 
     return $cont->getPage($rq, $rs, $args);
 });
 
-$app->post('/requestAjouterPrise[/]', function($rq, $rs, $args) {
+$app->post('/api/ajouterPrise[/]', function($rq, $rs, $args) {
     $cont= new ControleurAddPrise($this) ;
 
     return $cont->getPage($rq, $rs, $args);
 });
 
-$app->post('/requestSupprimerPlat[/]', function($rq, $rs, $args) {
+$app->post('/api/supprimerPlat[/]', function($rq, $rs, $args) {
     $cont= new ControleurSupPlat($this) ;
+
+    return $cont->getPage($rq, $rs, $args);
+});
+
+$app->post('/api/changerObjectifs[/]', function($rq, $rs, $args) {
+    $cont= new ControleurChangerObjectif($this) ;
 
     return $cont->getPage($rq, $rs, $args);
 });
