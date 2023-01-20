@@ -20,8 +20,9 @@ class ControleurGetPriseJour {
     public function getPage($rq, $rs, $args) {
 
         ConnectionFactory::creerConnection();
-        //
-        $prises = Prise::orderBy('date_prise', 'DESC')->where("date_prise", ">", (date('Y-m-d')." 00:00:00"), "AND", "date_prise", "<", (date('Y-m-d')." 23:59:59"))->get();
+        session_start();
+        
+        $prises = Prise::orderBy('date_prise', 'DESC')->where("date_prise", ">", (date('Y-m-d')." 00:00:00"), "AND", "date_prise", "<", (date('Y-m-d')." 23:59:59"))->where("id_user", "=", $_SESSION["id_user"])->get();
         $prisesArr = [];
         foreach ($prises as $value) {
             $plat = $value->plat()->first();

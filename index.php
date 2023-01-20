@@ -13,6 +13,7 @@ use app\controleurs\ControleurGetPriseJour;
 use app\controleurs\ControleurGetObjectif;
 use app\controleurs\ControleurSupPlat;
 use app\controleurs\ControleurChangerObjectif;
+use app\controleurs\ControleurDeconnexion;
 
 use app\controleurs\ControleurInscription;
 use app\controleurs\ControleurConnection;
@@ -79,6 +80,13 @@ $app->post('/inscriptionRedirect[/]', function( $rq, $rs, $args ) {
 
     return $cont->getPage($rq, $rs, $args);
 });
+
+$app->get('/deconnexionRedirect[/]', function( $rq, $rs, $args ) {
+    $cont= new ControleurDeconnexion($this) ;
+
+    return $cont->getPage($rq, $rs, $args);
+});
+
 
 
 

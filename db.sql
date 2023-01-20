@@ -1,10 +1,10 @@
-vbgfcdw-- phpMyAdmin SQL Dump
+-- phpMyAdmin SQL Dump
 -- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : ven. 18 nov. 2022 à 21:25
--- Version du serveur : 10.4.21-MariaDB
+-- Généré le : ven. 20 jan. 2023 à 22:07
+-- Version du serveur : 10.10.2-MariaDB
 -- Version de PHP : 8.0.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -29,21 +29,14 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `plat` (
   `id_plat` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
   `nom` varchar(80) NOT NULL,
   `energie` float NOT NULL,
   `lipides` float NOT NULL,
   `glucides` float NOT NULL,
-  `proteines` float NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Déchargement des données de la table `plat`
---
-
-INSERT INTO `plat` (`id_plat`, `nom`, `energie`, `lipides`, `glucides`, `proteines`) VALUES
-(3, '200g fromage blanc', 100, 1, 8, 15),
-(4, '120g tranches dinde', 122, 1.5, 0.6, 26),
-(5, '1 carré frais 0%', 19, 0.1, 0.5, 4.4);
+  `proteines` float NOT NULL,
+  `poids` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci; 
 
 -- --------------------------------------------------------
 
@@ -53,26 +46,12 @@ INSERT INTO `plat` (`id_plat`, `nom`, `energie`, `lipides`, `glucides`, `protein
 
 CREATE TABLE `prise` (
   `id_prise` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
   `date_prise` datetime NOT NULL,
   `plat` int(11) NOT NULL,
   `multiplicateurPoids` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Déchargement des données de la table `prise`
---
-
-INSERT INTO `prise` (`id_prise`, `date_prise`, `plat`, `multiplicateurPoids`) VALUES
-(61, '2022-11-15 20:16:45', 5, 1),
-(62, '2022-11-15 20:16:49', 3, 1),
-(63, '2022-11-15 20:16:50', 3, 1),
-(64, '2022-11-15 20:16:51', 3, 1),
-(65, '2022-11-15 20:16:51', 3, 1),
-(68, '2022-11-16 10:33:48', 4, 1),
-(104, '2022-11-16 20:21:38', 3, 1),
-(140, '2022-11-17 20:46:05', 4, 1),
-(142, '2022-11-17 21:05:21', 3, 1),
-(143, '2022-11-17 21:05:23', 5, 1);
 
 -- --------------------------------------------------------
 
@@ -83,35 +62,28 @@ INSERT INTO `prise` (`id_prise`, `date_prise`, `plat`, `multiplicateurPoids`) VA
 CREATE TABLE `user` (
   `id_user` int(11) NOT NULL,
   `pseudo` varchar(20) NOT NULL,
-  `oj_energie` int(11) NOT NULL,
-  `oj_lipides` int(11) NOT NULL,
-  `oj_glucides` int(11) NOT NULL,
-  `oj_proteines` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Déchargement des données de la table `user`
---
-
-INSERT INTO `user` (`id_user`, `pseudo`, `oj_energie`, `oj_lipides`, `oj_glucides`, `oj_proteines`) VALUES
-(1, 'Théo', 1850, 60, 180, 135);
-
---
--- Index pour les tables déchargées
---
+  `token` text NOT NULL,
+  `password` text NOT NULL,
+  `oj_energie` int(5) NOT NULL,
+  `oj_lipides` int(4) NOT NULL,
+  `oj_glucides` int(4) NOT NULL,
+  `oj_proteines` int(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Index pour la table `plat`
 --
 ALTER TABLE `plat`
-  ADD PRIMARY KEY (`id_plat`);
+  ADD PRIMARY KEY (`id_plat`),
+  ADD KEY `fk_idUserPlat` (`id_user`);
 
 --
 -- Index pour la table `prise`
 --
 ALTER TABLE `prise`
   ADD PRIMARY KEY (`id_prise`) USING BTREE,
-  ADD KEY `fk_idPlat` (`plat`) USING BTREE;
+  ADD KEY `fk_idPlat` (`plat`) USING BTREE,
+  ADD KEY `fk_idUserPrise` (`id_user`);
 
 --
 -- Index pour la table `user`
@@ -127,29 +99,36 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT pour la table `plat`
 --
 ALTER TABLE `plat`
-  MODIFY `id_plat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_plat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT pour la table `prise`
 --
 ALTER TABLE `prise`
-  MODIFY `id_prise` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=145;
+  MODIFY `id_prise` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=210;
 
 --
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Contraintes pour les tables déchargées
 --
 
 --
+-- Contraintes pour la table `plat`
+--
+ALTER TABLE `plat`
+  ADD CONSTRAINT `fk_idUserPlat` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`);
+
+--
 -- Contraintes pour la table `prise`
 --
 ALTER TABLE `prise`
-  ADD CONSTRAINT `fk_idAliment` FOREIGN KEY (`plat`) REFERENCES `plat` (`id_plat`);
+  ADD CONSTRAINT `fk_idAliment` FOREIGN KEY (`plat`) REFERENCES `plat` (`id_plat`),
+  ADD CONSTRAINT `fk_idUserPrise` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
