@@ -8,10 +8,11 @@ use app\autres\ModeleCourbe;
 
 class VueInscription extends Vue{
 
-    private $rq;
+    private $rq, $err;
 
-    public function __construct($rq){
+    public function __construct($rq, $err){
         $this->rq = $rq;
+        $this->err = $err;
     }
 
     public function render(){
@@ -36,15 +37,16 @@ class VueInscription extends Vue{
                             <div class="titre" style="margin-bottom: 20px;">Inscription</div>
                             <form action="$BaseUrl/inscriptionRedirect" method="POST">
                                 <div class="form_component">
-                                    <label for="name">Nom d'utilisateur</label>
+                                    <label for="name">Nom d'utilisateur :</label>
                                     <input class="form_component" id="username" name="username" type="text"></input>
                                 </div>
                                 <div class="form_component">
-                                    <label for="password">Mot de passe</label>
+                                    <label for="password">Mot de passe :</label>
                                     <input id="password" name="password" type="password"></input>
                                 </div>
                                 <button type="submit" style="margin-top:15px; min-width: 92%; font-size: 18px">S'inscrire</button>
                             </form>    
+                            <div class="erreur">{$this->err}</div>
                         </div>
                     </div>
                     {$this->getFooter(1, $BaseUrl)}

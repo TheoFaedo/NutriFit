@@ -23,13 +23,21 @@ class ControleurInscription {
         $BaseUrl = $rq->getUri()->getBasePath();
 
         if(isset($_SESSION["id_user"])){
+
             $rs = $rs->withHeader('Location', $rq->getUri()->getBasePath() . "/");
+
         }else{
+
             ConnectionFactory::creerConnection();
 
             //Recuperation des données
             $name = $rq->getParsedBodyParam("username");
             $password = $rq->getParsedBodyParam("password");
+
+            if(User::where('pseudo', '=', $name)->first() != null){
+                $rs = $rs->withHeader('Location', $rq->getUri()->getBasePath() . "/signin?err=pseudoexist");
+                return $rs;
+            }
 
             //Hachage du mot de passe
             $password = password_hash($password, PASSWORD_DEFAULT);
@@ -46,7 +54,7 @@ class ControleurInscription {
                 $_SESSION["id_user"] = $user->id_user;
                 $rs = $rs->withHeader('Location', $rq->getUri()->getBasePath() . "/");
             }else{
-                $rs = $rs->withHeader('Location', $rq->getUri()->getBasePath() . "/signin");
+                $rs = $rs->withHeader('Location', $rq->getUri()->getBasePath() . "/signin?err=erreurinconnue");
             }
         }
         return $rs;

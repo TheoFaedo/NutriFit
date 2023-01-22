@@ -25,8 +25,11 @@ class ControleurConnection {
 
         $rs = $rs->withHeader('Location', $rq->getUri()->getBasePath() . "/");
         if(isset($_SESSION["id_user"])){
+
             $rs = $rs->withHeader('Location', $rq->getUri()->getBasePath() . "/");
+
         }else{
+            
             ConnectionFactory::creerConnection();
             $name = $rq->getParsedBodyParam("username");
             $mdp = $rq->getParsedBodyParam("password");
@@ -41,7 +44,7 @@ class ControleurConnection {
                 $_SESSION["id_user"] = $user->id_user;
                 $rs = $rs->withHeader('Location', $rq->getUri()->getBasePath() . "/");
             }else{
-                $rs = $rs->withHeader('Location', $rq->getUri()->getBasePath() . "/connect");
+                $rs = $rs->withHeader('Location', $rq->getUri()->getBasePath() . "/connect?err=incorrectpassword");
             }
         }
         

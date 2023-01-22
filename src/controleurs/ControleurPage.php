@@ -11,7 +11,7 @@ use app\vues\VueInscription;
 use app\vues\VueConnection;
 
 use app\autres\ConnectionFactory;
-use app\autres\FonctionsUtiles;
+use app\autres\Erreur;
 
 use app\models\User;
 
@@ -28,7 +28,11 @@ class ControleurPage {
         $this->nomPage = $nomPage;
     }
     
-    public function getPage($rq, $rs, $args) {  
+    public function getPage($rq, $rs, $args){ 
+        
+        $erreur = "";
+        if(isset($_GET["err"]))
+            $erreur = Erreur::getMessage($_GET["err"]);
 
         session_start();
         $v;
@@ -36,12 +40,12 @@ class ControleurPage {
         if(!isset($_SESSION["id_user"])){
             switch($this->nomPage){
                 case "connection":
-                    $v = new VueConnection($rq);
+                    $v = new VueConnection($rq, $erreur);
                     $rs->getBody()->write($v->render());
                     return $rs;
     
                 case "inscription":
-                    $v = new VueInscription($rq);
+                    $v = new VueInscription($rq, $erreur);
                     $rs->getBody()->write($v->render());
                     return $rs;
             }

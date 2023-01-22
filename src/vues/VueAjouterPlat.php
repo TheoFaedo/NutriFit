@@ -45,7 +45,7 @@ class VueAjouterPlat extends Vue{
                                 <div class="nut_component"><div class="t_vnut">proteines</div><span class="valn">---</span>g</div>
                             </div>
                         </div>
-                        <div class="illot" style="background-color:var(--color2); font-size: 17px;">
+                        <div class="illot" style="background: linear-gradient(70deg, rgb(214, 214, 192), rgb(220, 220, 198)); font-size: 17px;">
                             <div class="titre">Liste prises du jour</div>
                             <ul id="liste_prises" style="overflow-y: scroll; height:90%">
                             

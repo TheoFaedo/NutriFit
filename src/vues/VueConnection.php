@@ -8,10 +8,11 @@ use app\autres\ModeleCourbe;
 
 class VueConnection extends Vue{
 
-    private $rq;
+    private $rq, $err;
 
-    public function __construct($rq){
+    public function __construct($rq, $err){
         $this->rq = $rq;
+        $this->err = $err;
     }
 
     public function render(){
@@ -44,7 +45,9 @@ class VueConnection extends Vue{
                                     <input id="password" name="password" type="password"></input>
                                 </div>
                                 <button type="submit" style="margin-top:15px; min-width: 92%; font-size: 18px">Se connecter</button>
-                            </form>    
+                            </form> 
+                            <div class="small_message">Pas encore inscrit ? <a href="$BaseUrl/signin">Inscrivez vous ici</a></div>
+                            <div class="erreur"></div>
                         </div>
                     </div>
                     {$this->getFooter(1, $BaseUrl)}
