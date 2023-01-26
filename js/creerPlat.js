@@ -12,6 +12,15 @@ window.addEventListener("load", () => {
     });
 })
 
+function setAffichageValNuts(valNuts){
+    inputs = {energie: document.getElementById("energie"), lip: document.getElementById("lipides"), prot: document.getElementById("proteines"), gluc: document.getElementById("glucides")};
+    inputs.energie.value = valNuts.energie;
+    inputs.lip.value = valNuts.lipides;
+    inputs.prot.value = valNuts.proteines;
+    inputs.gluc.value = valNuts.glucides;
+    document.getElementById("nom").value = valNuts.nom;
+}
+
 /**
  * Fonction permettant de convertir les macronutriments en energie
  */

@@ -20,3 +20,13 @@ function arrondi(nombre){
     if(nombre%1!=0) return nombre.toFixed(1);
     return nombre.toFixed(0);
 }
+
+function loadRessource(uri){
+    return fetch(uri).then(response => {
+        if(response.ok){
+            return response.json();
+        }else{
+            Promise.reject(new Error(response.statusText));
+        }
+    });
+}

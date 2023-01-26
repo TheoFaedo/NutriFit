@@ -64,12 +64,13 @@ html, body{
 
 select{
     border-radius: 50px;
-    min-width : 75%;
+    width : 75%;
     min-height: 50px;
     letter-spacing: 1px;
     font-size: 18px;
     padding: 10px 20px;
     transition: 0.8s ease;
+    text-overflow: ellipsis;
 }
 
 li{
@@ -99,6 +100,11 @@ button{
     background: linear-gradient(90deg, rgb(108, 172, 197), rgb(91, 147, 169));
     border: 0px;
     color: white;
+}
+
+button:active{
+    transition: opacity 1s;
+    background: linear-gradient(90deg, rgb(92, 146, 167), rgb(83, 132, 151));
 }
 
 .illot{
@@ -193,6 +199,14 @@ input[type="text"], input[type="password"]
     color: rgb(211, 0, 0);
 }
 
+video{
+    width: 100% !important;
+    height: auto !important;
+}
+
+.cacher{
+    display: none;
+}
 
 /*
     SCROLLBAR

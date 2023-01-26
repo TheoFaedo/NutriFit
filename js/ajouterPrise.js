@@ -8,16 +8,6 @@ window.addEventListener("load", () => {
     actualiserObjectif();
 })
 
-function loadRessource(uri){
-    return fetch(uri).then(response => {
-        if(response.ok){
-            return response.json();
-        }else{
-            Promise.reject(new Error(response.statusText));
-        }
-    });
-}
-
 //Récupération des plats de l'utilisateur
 req = loadRessource("api/getPlats");
 req.then((res) => {
@@ -186,3 +176,25 @@ function supprimerPrise(idprise){
         })
         .then((response) => actualiserPrises());
 }
+
+Quagga.init({
+    inputStream : {
+      name : "Live",
+      type : "LiveStream",
+      target: document.querySelector('#camera')    // Or '#yourElement' (optional)
+    },
+    decoder : {
+      readers : ["ean_13_reader"],
+    }
+  }, function(err) {
+      if (err) {
+          console.log(err);
+          return
+      }
+      console.log("Initialization finished. Ready to start");
+      Quagga.start();
+  });
+
+Quagga.onDetected((data) => {
+    console.log(data);
+});

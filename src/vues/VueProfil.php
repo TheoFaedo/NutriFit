@@ -21,7 +21,7 @@ class VueProfil extends Vue{
 
         $BaseUrl = $this->rq->getUri()->getBasePath();
 
-        $html = <<<END
+        $html = <<<HTML
         <!DOCTYPE html>
         <html lang="fr">
             <head>
@@ -58,7 +58,7 @@ class VueProfil extends Vue{
         </html>   
         <script src="$BaseUrl/js/main.js"></script>
         <script src="$BaseUrl/js/profil.js"></script>
-        END ;
+        HTML ;
 
         return $html;
     }

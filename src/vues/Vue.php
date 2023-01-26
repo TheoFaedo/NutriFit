@@ -20,13 +20,13 @@ class Vue{
     protected function getFooter($selectedIndex, $BaseUrl){
         $tab = ["img_inactive", "img_inactive", "img_inactive"];
         $tab[$selectedIndex] = "img_active";
-        return <<<END
+        return <<<HTML
         <div id="footbar">
-            <div class="footbar_button"><img/ src="$BaseUrl/img/clipboard.png" class="{$tab[0]}">journal</div>
-            <div class="footbar_button"><img/ src="$BaseUrl/img/user.png" class="{$tab[1]}">profil</div>
-            <div class="footbar_button"><img/ src="$BaseUrl/img/shallow-pan-of-food.png" class="{$tab[2]}">créer un plat</div>
+            <div class="footbar_button"><img src="$BaseUrl/img/clipboard.png" class="{$tab[0]}">journal</div>
+            <div class="footbar_button"><img src="$BaseUrl/img/user.png" class="{$tab[1]}">profil</div>
+            <div class="footbar_button"><img src="$BaseUrl/img/shallow-pan-of-food.png" class="{$tab[2]}">créer un plat</div>
         </div>
-        END;
+        HTML;
     }
 
     protected function getHeader(){

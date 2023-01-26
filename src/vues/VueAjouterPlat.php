@@ -18,7 +18,7 @@ class VueAjouterPlat extends Vue{
 
         $BaseUrl = $this->rq->getUri()->getBasePath();
 
-        $html = <<<END
+        $html = <<<HTML
         <!DOCTYPE html>
         <html lang="fr">
             <head>
@@ -52,7 +52,7 @@ class VueAjouterPlat extends Vue{
                             </ul>
                         </div>
                         <div class="illot">
-                            <div class="titre" style="float:down">Objectif journalier</div>
+                            <div class="titre">Objectif journalier</div>
                             <div class="aff_vn">
                                 <div class="nut_component"><div class="t_vnut">energie</div><span class="prog">---</span><br>/<span class="obj">---</span>kcal</div>
                                 <div class="nut_component"><div class="t_vnut">lipides</div><span class="prog">---</span><br>/<span class="obj">---</span>g</div>
@@ -67,7 +67,7 @@ class VueAjouterPlat extends Vue{
         </html>
         <script src="$BaseUrl/js/main.js"></script>
         <script src="$BaseUrl/js/ajouterPrise.js"></script>
-        END ;
+        HTML ;
         return $html;
     }
 

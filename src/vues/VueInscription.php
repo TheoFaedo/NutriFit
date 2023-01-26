@@ -19,7 +19,7 @@ class VueInscription extends Vue{
 
         $BaseUrl = $this->rq->getUri()->getBasePath();
 
-        $html = <<<END
+        $html = <<<HTML
         <!DOCTYPE html>
         <html lang="fr">
             <head>
@@ -54,7 +54,7 @@ class VueInscription extends Vue{
             </body>
         </html>   
         <script src="$BaseUrl/js/main.js"></script>
-        END ;
+        HTML ;
 
         return $html;
     }
