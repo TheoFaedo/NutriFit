@@ -24,16 +24,16 @@ class ControleurGetPriseJour {
         
         $prises = Prise::orderBy('date_prise', 'DESC')->where("date_prise", ">", (date('Y-m-d')." 00:00:00"), "AND", "date_prise", "<", (date('Y-m-d')." 23:59:59"))->where("id_user", "=", $_SESSION["id_user"])->get();
         $prisesArr = [];
-        foreach ($prises as $value) {
-            $plat = $value->plat()->first();
+        foreach ($prises as $prise) {
+            $plat = $prise->plat()->first();
             array_push($prisesArr, array(
-                "id_prise" => $value->id_prise,
-                "date_prise" => \DateTime::createFromFormat("Y-m-d H:i:s", $value->date_prise)->format("H:i"),
+                "id_prise" => $prise->id_prise,
+                "date_prise" => \DateTime::createFromFormat("Y-m-d H:i:s", $prise->date_prise)->format("H:i"),
                 "nom" => $plat->nom, 
-                "energie" => $plat->energie, 
-                "lipides" => $plat->lipides, 
-                "glucides" => $plat->glucides, 
-                "proteines" => $plat->proteines
+                "energie" => $plat->energie * $prise->multiplicateurPoids, 
+                "lipides" => $plat->lipides * $prise->multiplicateurPoids, 
+                "glucides" => $plat->glucides * $prise->multiplicateurPoids, 
+                "proteines" => $plat->proteines * $prise->multiplicateurPoids
             ));
         }
 

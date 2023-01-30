@@ -30,9 +30,9 @@ class VueAjouterPlat extends Vue{
             </head>
             <body>
                 <div id=corp>
-                    <div id="bar" style="height: 5%;"><div>Nutrifit</div></div>
+                    <div id="bar"><div>Nutrifit</div></div>
                     <div id="content" class="contenu_ajouter_plat">
-                        <div class="illot">
+                        <div class="illot" style="flex-basis: 100%; max-height: max-content">
                             <div class="titre">Ajouter Prise</div>
                             <select name="plats" id="plat-select">
                                 <option value="-1">Choisissez un plat</option>
@@ -45,13 +45,13 @@ class VueAjouterPlat extends Vue{
                                 <div class="nut_component"><div class="t_vnut">proteines</div><span class="valn">---</span>g</div>
                             </div>
                         </div>
-                        <div class="illot" style="background: linear-gradient(70deg, rgb(214, 214, 192), rgb(220, 220, 198)); font-size: 17px;">
+                        <div class="illot" style="background: linear-gradient(70deg, rgb(214, 214, 192), rgb(220, 220, 198)); font-size: 17px; min-height: 200px; flex-basis: 100%">
                             <div class="titre">Liste prises du jour</div>
                             <ul id="liste_prises" style="overflow-y: scroll; height:90%">
                             
                             </ul>
                         </div>
-                        <div class="illot">
+                        <div class="illot" style="flex-basis: 100%">
                             <div class="titre">Objectif journalier</div>
                             <div class="aff_vn">
                                 <div class="nut_component"><div class="t_vnut">energie</div><span class="prog">---</span><br>/<span class="obj">---</span>kcal</div>

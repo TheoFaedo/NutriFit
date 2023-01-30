@@ -5,22 +5,7 @@
 const tolerance_precision_code_barre = 0.16;
 
 window.addEventListener("load", () => {
-    Quagga.init({
-        inputStream : {
-        name : "Live",
-        type : "LiveStream",
-        target: document.querySelector('#camera')    // Or '#yourElement' (optional)
-        },
-        decoder : {
-        readers : ["ean_reader"]
-        }
-    }, function(err) {
-        if (err) {
-            console.log(err);
-            return
-        }
-        console.log("Initialization finished. Ready to start");
-    });
+
 })
 
 document.getElementById("boutonPhoto").addEventListener("click", () => {
@@ -65,6 +50,22 @@ function cacher_camera(){
 }
 
 function activer_quagga(){
+    Quagga.init({
+        inputStream : {
+        name : "Live",
+        type : "LiveStream",
+        target: document.querySelector('#camera')    // Or '#yourElement' (optional)
+        },
+        decoder : {
+        readers : ["ean_reader"]
+        }
+    }, function(err) {
+        if (err) {
+            console.log(err);
+            return
+        }
+        console.log("Initialization finished. Ready to start");
+    });
     Quagga.start();
 }
 

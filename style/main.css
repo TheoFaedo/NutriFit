@@ -1,10 +1,16 @@
+*{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    font-family: arial;
+}
+
 html, body{
     --color1: rgb(226, 226, 183);
     --color2: rgb(214, 214, 192);
     margin: 0;
     height: 100%;
     width: 100%;
-    font-family: arial;
     border: 0;
 }
 
@@ -22,7 +28,7 @@ html, body{
     color: white;
     text-align: center;
     font-size: 25px;
-    height: 5%;
+    height: 7%;
 }
 
 #bar div{
@@ -35,11 +41,11 @@ html, body{
     font-size: 15px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    height: 7%;
+    height: 9%;
 }
 
 #content{
-    height: 88%;
+    height: 84%;
     overflow-y: scroll;
 }
 
@@ -179,8 +185,10 @@ hr{
 }
 
 .contenu_ajouter_plat{
-    display: grid;
-    grid-template-rows: 1.5fr 3fr 1.5fr;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
 }
 
 input[type="text"], input[type="password"]
@@ -261,6 +269,15 @@ video{
     #corp{
         margin-left: 38%;
         margin-right: 38%;
+    }
+}
+
+@media (orientation: portrait){
+    #bar{
+        display: none;
+    }
+    #content{
+        height: 91%;
     }
 }
 

@@ -39,7 +39,7 @@ class VueProfil extends Vue{
                             Connecté(e) en tant que <b>{$this->user_data->pseudo}</b>
                             <form action="$BaseUrl/deconnexionRedirect" method="GET"><button type="submit" id="bouton_deco" style="margin-top:15px; min-width: 80%; font-size: 18px">Deconnexion</button></form>
                         </div>
-                        <div class="illot" style="text-align:center; margin-top: 10%; margin-bottom: auto">
+                        <div class="illot" style="text-align:center; margin-bottom: auto">
                             <div class="titre" style="margin-bottom: 20px;">Changer Objectif</div>
 
                                 <div class="form_component" style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr;">
