@@ -26,8 +26,9 @@ Jauger mes compétences en développement front-end et back-end avant de passer 
 - enregitrer la prise d'un plat
 - consulter ses apports journaliers
 
-## Points en cours d'amélioration:
+## Fonctionnités futures et points à améliorer:
 
 - Gestion des erreurs
 - Sécurisation
-- Statistiques sur la page
+- Statistiques sur la page profil
+- Passer à une structure 100% api
