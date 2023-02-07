@@ -106,6 +106,7 @@ button{
     background: linear-gradient(90deg, rgb(108, 172, 197), rgb(91, 147, 169));
     border: 0px;
     color: white;
+    font-size: 0.7em;
 }
 
 button:active{
@@ -193,7 +194,7 @@ hr{
 
 input[type="text"], input[type="password"]
 {
-    font-size:22px;
+    font-size:20px;
 }
 
 .small_message{
@@ -208,8 +209,12 @@ input[type="text"], input[type="password"]
 }
 
 video{
-    width: 100% !important;
     height: auto !important;
+    width: 100% !important;
+}
+
+.drawingBuffer{
+    display: none;
 }
 
 .cacher{
@@ -278,6 +283,12 @@ video{
     }
     #content{
         height: 91%;
+    }
+    #camera{
+        height: 99%;
+    }
+    video{
+        height: 100% !important;
     }
 }
 

@@ -8,10 +8,11 @@ use app\autres\ModeleCourbe;
 
 class VueCreerPlat extends Vue{
 
-    private $rq;
+    private $rq, $err;
 
-    public function __construct($rq){
+    public function __construct($rq, $err){
         $this->rq = $rq;
+        $this->err = $err;
     }
 
     public function render(){
@@ -43,6 +44,7 @@ class VueCreerPlat extends Vue{
                                     <div class="form_component"><label for="proteines">Proteines(g):</label><input type="number" step="0.1" min="0" id="proteines" name="proteines" requiredminlength="1" maxlength="5" size="10" placeholder="g"></div>
                                 </div>
                                 <button type="submit" style="margin-top:15px; min-width: 80%; font-size: 18px">Créer le plat</button>
+                                <div class="erreur">{$this->err}</div>
                             </form>    
                         </div>
                         <div class="illot" style="text-align:center;">

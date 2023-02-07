@@ -7,6 +7,8 @@ use app\vues\VuePage;
 
 use app\autres\ConnectionFactory;
 use app\autres\FonctionsUtiles;
+use app\autres\Erreur;
+use app\autres\Verificateur;
 
 use app\models\Plat;
 
@@ -24,12 +26,21 @@ class ControleurCreerPlat {
 
         ConnectionFactory::creerConnection();
 
+        $BaseUrl = $rq->getUri()->getBasePath();
+
+        if(!Verificateur::verifierUtilisateurAuthentifie()) return $rs->withJSON(array("erreur" => Erreur::getMessage("noauthenticated")), 400);
+
         $nom = $rq->getParsedBodyParam("nom");
         $id_user = $_SESSION["id_user"];
         $energie = $rq->getParsedBodyParam("energie");
         $lipides = $rq->getParsedBodyParam("lipides");
         $glucides = $rq->getParsedBodyParam("glucides");
         $proteines = $rq->getParsedBodyParam("proteines");
+
+        if(!Verificateur::verifierParametresDuCorpDeLaRequeteNonNull(array($nom, $energie, $lipides, $glucides, $proteines))) {
+            $rs = $rs->withHeader('Location', $rq->getUri()->getBasePath() . "/creerPlat?err=emptyparam");
+            return $rs;
+        }
 
         $plat = new Plat();
         $plat->nom = $nom;

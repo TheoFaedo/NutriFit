@@ -2,10 +2,25 @@
     SCRIPT GERANT LE SYSTEME DE DETECTION DE CODES BARRES
 */
 
-const tolerance_precision_code_barre = 0.16;
+const tolerance_precision_code_barre = 0.20;
 
 window.addEventListener("load", () => {
-
+    Quagga.init({
+        inputStream : {
+        name : "Live",
+        type : "LiveStream",
+        target: document.querySelector('#camera') ,   // Or '#yourElement' (optional)
+        },
+        decoder : {
+        readers : ["ean_reader"]
+        }
+    }, function(err) {
+        if (err) {
+            console.log(err);
+            return
+        }
+        console.log("Initialization finished. Ready to start");
+    });
 })
 
 document.getElementById("boutonPhoto").addEventListener("click", () => {
@@ -50,22 +65,6 @@ function cacher_camera(){
 }
 
 function activer_quagga(){
-    Quagga.init({
-        inputStream : {
-        name : "Live",
-        type : "LiveStream",
-        target: document.querySelector('#camera')    // Or '#yourElement' (optional)
-        },
-        decoder : {
-        readers : ["ean_reader"]
-        }
-    }, function(err) {
-        if (err) {
-            console.log(err);
-            return
-        }
-        console.log("Initialization finished. Ready to start");
-    });
     Quagga.start();
 }
 
@@ -81,7 +80,9 @@ function lecture_assez_precise(data){
     
     let decodedCodes = data.codeResult.decodedCodes;
     let precision_des_codes = decodedCodes.slice(1, decodedCodes.length).map((e) => e.error);
-    
+
+    //Ici on verifie la précision de chaque chiffres
+    //Si l'une n'est pas assez précise, on retourne false
     for(let i = 0; i<precision_des_codes.length; i++){
         if(precision_des_codes[i] > tolerance_precision_code_barre) return false;
     }

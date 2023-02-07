@@ -47,7 +47,7 @@ class VueConnection extends Vue{
                                 <button type="submit" style="margin-top:15px; min-width: 92%; font-size: 18px">Se connecter</button>
                             </form> 
                             <div class="small_message">Pas encore inscrit ? <a href="$BaseUrl/signin">Inscrivez vous ici</a></div>
-                            <div class="erreur"></div>
+                            <div class="erreur">{$this->err}</div>
                         </div>
                     </div>
                     {$this->getFooter(1, $BaseUrl)}

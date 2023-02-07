@@ -57,7 +57,7 @@ class ControleurPage {
 
         switch($this->nomPage){
             case "creerPlat":
-                $v = new VueCreerPlat($rq);
+                $v = new VueCreerPlat($rq, $erreur);
                 break;
 
             case "ajouterPlat":

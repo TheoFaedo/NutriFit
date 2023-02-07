@@ -5,6 +5,8 @@ require 'vendor/autoload.php';
 
 use app\autres\ConnectionFactory;
 use app\autres\FonctionsUtiles;
+use app\autres\Erreur;
+use app\autres\Verificateur;
 
 use app\models\User;
 
@@ -21,6 +23,8 @@ class ControleurGetObjectif {
         ConnectionFactory::creerConnection();
 
         session_start();
+
+        if(!Verificateur::verifierUtilisateurAuthentifie($rs)) return $rs->withJSON(array("erreur" => Erreur::getMessage("noauthenticated")), 400);
 
         $user = User::where("id_user", "=", $_SESSION["id_user"])->first();
 

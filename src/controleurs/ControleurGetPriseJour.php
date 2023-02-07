@@ -5,6 +5,8 @@ require 'vendor/autoload.php';
 
 use app\autres\ConnectionFactory;
 use app\autres\FonctionsUtiles;
+use app\autres\Verificateur;
+use app\autres\Erreur;
 
 use app\models\Plat;
 use app\models\Prise;
@@ -21,6 +23,8 @@ class ControleurGetPriseJour {
 
         ConnectionFactory::creerConnection();
         session_start();
+
+        if(!Verificateur::verifierUtilisateurAuthentifie($rs)) return $rs->withJSON(array("erreur" => Erreur::getMessage("noauthenticated")), 400);
         
         $prises = Prise::orderBy('date_prise', 'DESC')->where("date_prise", ">", (date('Y-m-d')." 00:00:00"), "AND", "date_prise", "<", (date('Y-m-d')." 23:59:59"))->where("id_user", "=", $_SESSION["id_user"])->get();
         $prisesArr = [];

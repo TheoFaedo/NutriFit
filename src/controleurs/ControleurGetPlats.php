@@ -7,6 +7,8 @@ use app\vues\VuePage;
 
 use app\autres\ConnectionFactory;
 use app\autres\FonctionsUtiles;
+use app\autres\Erreur;
+use app\autres\Verificateur;
 
 use app\models\Plat;
 
@@ -23,6 +25,8 @@ class ControleurGetPlats {
         ConnectionFactory::creerConnection();
 
         session_start();
+
+        if(!Verificateur::verifierUtilisateurAuthentifie($rs)) return $rs->withJSON(array("erreur" => Erreur::getMessage("noauthenticated")), 400);
 
         $plats = Plat::all()->where("id_user", "=", $_SESSION["id_user"]);
 

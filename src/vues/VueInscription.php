@@ -38,11 +38,15 @@ class VueInscription extends Vue{
                             <form action="$BaseUrl/inscriptionRedirect" method="POST">
                                 <div class="form_component">
                                     <label for="name">Nom d'utilisateur :</label>
-                                    <input class="form_component" id="username" name="username" type="text"></input>
+                                    <input class="form_component" id="username" name="username" type="text" placeholder="nom d'utilisateur"></input>
                                 </div>
                                 <div class="form_component">
                                     <label for="password">Mot de passe :</label>
-                                    <input id="password" name="password" type="password"></input>
+                                    <input id="password" name="password" type="password" placeholder="mot de passe"></input>
+                                </div>
+                                <div class="form_component">
+                                    <label for="c_password">Confirmer le mot de passe :</label>
+                                    <input id="c_password" name="confirm_password" type="password" placeholder="confirmer le mot de passe"></input>
                                 </div>
                                 <button type="submit" style="margin-top:15px; min-width: 92%; font-size: 18px">S'inscrire</button>
                             </form>    
