@@ -2,8 +2,6 @@
 
 Nutrifit est un projet d'application web de gestion de l'alimentation.
 
-Le site est déployé sur [nutrifitapp.fr](https://nutrifitapp.fr) et est mis à jour régulièrement par rapport au repository git.
-
 ## Objectif
 
 Jauger mes compétences en développement front-end et back-end avant de passer à l'apprentissage d'un nouveau framework.
