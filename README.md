@@ -1,6 +1,6 @@
 # Nutrifit
 
-Nutrifit est un projet d'application web de gestion de l'alimentation.
+Nutrifit est un projet d'application web de gestion de l'alimentation. J'ai recréé ce projet afin de l'améliorer avec d'autres technologies (voir [Nutrifit2](https://github.com/TheoFaedo/Nutrifit2)
 
 ## Objectif
 
